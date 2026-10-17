@@ -6,11 +6,26 @@ import '../auth/auth_service.dart';
 import '../feed/data/prompt_repository.dart';
 import 'collections_repository.dart';
 
-class CollectionsScreen extends ConsumerWidget {
+class CollectionsScreen extends ConsumerStatefulWidget {
   const CollectionsScreen({super.key});
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<CollectionsScreen> createState() => _CollectionsState();
+}
+
+class _CollectionsState extends ConsumerState<CollectionsScreen> {
+  String? _collectionId;
+  @override
+  Widget build(BuildContext context) {
     final user = ref.watch(authProvider).asData?.value;
+    final activeBoard =
+        ref
+                .watch(boardsProvider)
+                .asData
+                ?.value
+                .any((b) => b['id'] == _collectionId) ==
+            true
+        ? _collectionId
+        : null;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your collections'),
@@ -94,17 +109,27 @@ class CollectionsScreen extends ConsumerWidget {
                         data: (boards) => Wrap(
                           spacing: 10,
                           runSpacing: 10,
-                          children: boards
-                              .map(
-                                (b) => Chip(
-                                  avatar: const Icon(
-                                    Icons.lock_outline,
-                                    size: 16,
-                                  ),
-                                  label: Text(b['name'] as String),
+                          children: [
+                            ChoiceChip(
+                              label: const Text('All saved'),
+                              selected: activeBoard == null,
+                              onSelected: (_) =>
+                                  setState(() => _collectionId = null),
+                            ),
+                            ...boards.map(
+                              (b) => ChoiceChip(
+                                avatar: const Icon(
+                                  Icons.lock_outline,
+                                  size: 16,
                                 ),
-                              )
-                              .toList(),
+                                label: Text(b['name'] as String),
+                                selected: activeBoard == b['id'],
+                                onSelected: (_) => setState(
+                                  () => _collectionId = b['id'] as String,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         loading: () => const LinearProgressIndicator(),
                         error: (_, _) =>
@@ -128,6 +153,11 @@ class CollectionsScreen extends ConsumerWidget {
                               )
                             : Column(
                                 children: items
+                                    .where(
+                                      (item) =>
+                                          activeBoard == null ||
+                                          item.collectionId == activeBoard,
+                                    )
                                     .map(
                                       (item) => FutureBuilder(
                                         future: ref

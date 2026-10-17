@@ -1,9 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
+        android:allowBackup="false"
+        android:usesCleartextTraffic="false"
         android:label="PromptVault AI"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@drawable/promptvault_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

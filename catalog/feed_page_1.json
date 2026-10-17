@@ -319,7 +319,7 @@
       "id": "pv_008",
       "title": "The weekend collection",
       "category": "fashion",
-      "raw_prompt": "Create a visual identity concept for [Brand: WEEKEND CLUB], a [Industry: independent fashion label], [Style: understated typographic wordmark], [Palette: ink black and ivory], flat vector, no mockup.",
+      "raw_prompt": "Editorial fashion photograph for [Brand: WEEKEND CLUB], showing [Subject: an effortless city outfit], [Palette: warm neutrals], candid street composition, natural daylight, textured fabrics, realistic photography.",
       "variables": [
         {
           "key": "Brand",
@@ -327,18 +327,13 @@
           "suggestions": []
         },
         {
-          "key": "Industry",
-          "default_value": "independent fashion label",
-          "suggestions": []
-        },
-        {
-          "key": "Style",
-          "default_value": "understated typographic wordmark",
+          "key": "Subject",
+          "default_value": "an effortless city outfit",
           "suggestions": []
         },
         {
           "key": "Palette",
-          "default_value": "ink black and ivory",
+          "default_value": "warm neutrals",
           "suggestions": []
         }
       ],
@@ -367,22 +362,22 @@
     {
       "id": "pv_009",
       "title": "Built for the spotlight",
-      "category": "3d_icons",
-      "raw_prompt": "Isometric 3D icon of [Object: a miniature architectural tower], [Material: frosted glass and brushed aluminum], [Palette: electric indigo and silver], soft ambient occlusion, transparent background.",
+      "category": "ui_design",
+      "raw_prompt": "Architectural website hero featuring [Subject: a contemporary office tower], [Materials: glass and brushed aluminum], [Palette: cool blue and silver], low-angle city photograph, clean space for accessible typography.",
       "variables": [
         {
-          "key": "Object",
-          "default_value": "a miniature architectural tower",
+          "key": "Subject",
+          "default_value": "a contemporary office tower",
           "suggestions": []
         },
         {
-          "key": "Material",
-          "default_value": "frosted glass and brushed aluminum",
+          "key": "Materials",
+          "default_value": "glass and brushed aluminum",
           "suggestions": []
         },
         {
           "key": "Palette",
-          "default_value": "electric indigo and silver",
+          "default_value": "cool blue and silver",
           "suggestions": []
         }
       ],
@@ -397,7 +392,7 @@
       "is_pro_only": false,
       "likes_count": 0,
       "tags": [
-        "3d_icons",
+        "ui_design",
         "editorial",
         "starter"
       ],
@@ -411,22 +406,26 @@
     {
       "id": "pv_010",
       "title": "Something worth saying",
-      "category": "typography",
-      "raw_prompt": "Editorial typography poster reading [Headline: MAKE ROOM FOR IDEAS], [Style: expressive condensed lettering], [Palette: cobalt blue and off-white], dramatic hierarchy, precise letterforms, print-ready composition.",
+      "category": "portraits",
+      "raw_prompt": "Editorial portrait of [Subject: a thoughtful creative professional], [Lighting: soft outdoor light], [Backdrop: dark foliage], natural skin texture, close composition, shallow depth of field, candid magazine photography.",
       "variables": [
         {
-          "key": "Headline",
-          "default_value": "MAKE ROOM FOR IDEAS",
+          "key": "Subject",
+          "default_value": "a thoughtful creative professional",
           "suggestions": []
         },
         {
-          "key": "Style",
-          "default_value": "expressive condensed lettering",
-          "suggestions": []
+          "key": "Lighting",
+          "default_value": "soft outdoor light",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
         },
         {
-          "key": "Palette",
-          "default_value": "cobalt blue and off-white",
+          "key": "Backdrop",
+          "default_value": "dark foliage",
           "suggestions": []
         }
       ],
@@ -441,7 +440,7 @@
       "is_pro_only": false,
       "likes_count": 0,
       "tags": [
-        "typography",
+        "portraits",
         "editorial",
         "starter"
       ],
@@ -456,11 +455,11 @@
       "id": "pv_011",
       "title": "Still life in motion",
       "category": "product_ads",
-      "raw_prompt": "Photorealistic campaign of [Product: a sculptural lounge chair], [Setting: a sunlit modern gallery], [Material: natural oak and linen], architectural shadows, wide composition, interior design magazine quality.",
+      "raw_prompt": "Photorealistic campaign of [Product: a minimalist white studio stool], [Setting: a sunlit modern gallery], [Material: matte painted timber], architectural shadows, wide composition, interior design magazine quality.",
       "variables": [
         {
           "key": "Product",
-          "default_value": "a sculptural lounge chair",
+          "default_value": "a minimalist white studio stool",
           "suggestions": []
         },
         {
@@ -470,7 +469,7 @@
         },
         {
           "key": "Material",
-          "default_value": "natural oak and linen",
+          "default_value": "matte painted timber",
           "suggestions": []
         }
       ],
@@ -564,7 +563,7 @@
       "outputs": [
         {
           "model": "chatgpt_4o",
-          "image_url": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }
@@ -585,18 +584,18 @@
     },
     {
       "id": "pv_014",
-      "title": "The tailored edit",
+      "title": "Warm studio headshot",
       "category": "men",
-      "raw_prompt": "Fashion editorial photograph of [Subject: a tailored linen suit], [Lighting: warm studio daylight], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "raw_prompt": "Editorial photograph of [Subject: a friendly professional headshot], [Lighting: soft studio light], [Backdrop: a restrained editorial setting], natural textures, thoughtful composition, realistic color, magazine photography.",
       "variables": [
         {
           "key": "Subject",
-          "default_value": "a tailored linen suit",
+          "default_value": "a friendly professional headshot",
           "suggestions": []
         },
         {
           "key": "Lighting",
-          "default_value": "warm studio daylight",
+          "default_value": "soft studio light",
           "suggestions": [
             "Softbox studio",
             "Neon reflections",
@@ -605,14 +604,14 @@
         },
         {
           "key": "Backdrop",
-          "default_value": "a clean architectural setting",
+          "default_value": "a restrained editorial setting",
           "suggestions": []
         }
       ],
       "outputs": [
         {
           "model": "gemini_nano_banana",
-          "image_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }
@@ -635,16 +634,16 @@
       "id": "pv_015",
       "title": "Modern muse",
       "category": "women",
-      "raw_prompt": "Fashion editorial photograph of [Subject: a minimalist evening outfit], [Lighting: soft window light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "raw_prompt": "Editorial photograph of [Subject: a casual denim lifestyle portrait], [Lighting: open shade beside a blue wall], [Backdrop: a restrained editorial setting], natural textures, thoughtful composition, realistic color, magazine photography.",
       "variables": [
         {
           "key": "Subject",
-          "default_value": "a minimalist evening outfit",
+          "default_value": "a casual denim lifestyle portrait",
           "suggestions": []
         },
         {
           "key": "Lighting",
-          "default_value": "soft window light",
+          "default_value": "open shade beside a blue wall",
           "suggestions": [
             "Softbox studio",
             "Neon reflections",
@@ -653,14 +652,14 @@
         },
         {
           "key": "Backdrop",
-          "default_value": "a clean architectural setting",
+          "default_value": "a restrained editorial setting",
           "suggestions": []
         }
       ],
       "outputs": [
         {
           "model": "flux",
-          "image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }
@@ -708,7 +707,7 @@
       "outputs": [
         {
           "model": "midjourney",
-          "image_url": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }
@@ -756,7 +755,7 @@
       "outputs": [
         {
           "model": "chatgpt_4o",
-          "image_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }
@@ -777,18 +776,18 @@
     },
     {
       "id": "pv_018",
-      "title": "The silk story",
+      "title": "Floral breeze",
       "category": "women",
-      "raw_prompt": "Fashion editorial photograph of [Subject: a flowing silk dress], [Lighting: golden hour backlight], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "raw_prompt": "Editorial photograph of [Subject: a floral summer dress in a seaside breeze], [Lighting: warm natural sunlight], [Backdrop: a restrained editorial setting], natural textures, thoughtful composition, realistic color, magazine photography.",
       "variables": [
         {
           "key": "Subject",
-          "default_value": "a flowing silk dress",
+          "default_value": "a floral summer dress in a seaside breeze",
           "suggestions": []
         },
         {
           "key": "Lighting",
-          "default_value": "golden hour backlight",
+          "default_value": "warm natural sunlight",
           "suggestions": [
             "Softbox studio",
             "Neon reflections",
@@ -797,14 +796,14 @@
         },
         {
           "key": "Backdrop",
-          "default_value": "a clean architectural setting",
+          "default_value": "a restrained editorial setting",
           "suggestions": []
         }
       ],
       "outputs": [
         {
           "model": "gemini_nano_banana",
-          "image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }
@@ -825,18 +824,18 @@
     },
     {
       "id": "pv_019",
-      "title": "Sneaker campaign",
+      "title": "The capsule collection",
       "category": "fashion",
-      "raw_prompt": "Fashion editorial photograph of [Subject: a limited edition sneaker], [Lighting: dramatic rim lighting], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "raw_prompt": "Editorial photograph of [Subject: a curated clothing rail with neutral layers], [Lighting: soft side window light], [Backdrop: a restrained editorial setting], natural textures, thoughtful composition, realistic color, magazine photography.",
       "variables": [
         {
           "key": "Subject",
-          "default_value": "a limited edition sneaker",
+          "default_value": "a curated clothing rail with neutral layers",
           "suggestions": []
         },
         {
           "key": "Lighting",
-          "default_value": "dramatic rim lighting",
+          "default_value": "soft side window light",
           "suggestions": [
             "Softbox studio",
             "Neon reflections",
@@ -845,14 +844,14 @@
         },
         {
           "key": "Backdrop",
-          "default_value": "a clean architectural setting",
+          "default_value": "a restrained editorial setting",
           "suggestions": []
         }
       ],
       "outputs": [
         {
           "model": "flux",
-          "image_url": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1551232864-3f0890e580d9?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }
@@ -900,7 +899,7 @@
       "outputs": [
         {
           "model": "midjourney",
-          "image_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }
@@ -921,18 +920,18 @@
     },
     {
       "id": "pv_021",
-      "title": "Beauty in detail",
+      "title": "The sunlight portrait",
       "category": "women",
-      "raw_prompt": "Fashion editorial photograph of [Subject: a beauty editorial portrait], [Lighting: soft beauty lighting], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "raw_prompt": "Editorial photograph of [Subject: a relaxed lifestyle portrait], [Lighting: dappled afternoon sunlight], [Backdrop: a restrained editorial setting], natural textures, thoughtful composition, realistic color, magazine photography.",
       "variables": [
         {
           "key": "Subject",
-          "default_value": "a beauty editorial portrait",
+          "default_value": "a relaxed lifestyle portrait",
           "suggestions": []
         },
         {
           "key": "Lighting",
-          "default_value": "soft beauty lighting",
+          "default_value": "dappled afternoon sunlight",
           "suggestions": [
             "Softbox studio",
             "Neon reflections",
@@ -941,14 +940,14 @@
         },
         {
           "key": "Backdrop",
-          "default_value": "a clean architectural setting",
+          "default_value": "a restrained editorial setting",
           "suggestions": []
         }
       ],
       "outputs": [
         {
           "model": "chatgpt_4o",
-          "image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }
@@ -969,13 +968,13 @@
     },
     {
       "id": "pv_022",
-      "title": "Denim in the city",
+      "title": "Bold street color",
       "category": "fashion",
-      "raw_prompt": "Fashion editorial photograph of [Subject: a contemporary denim outfit], [Lighting: urban afternoon light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "raw_prompt": "Editorial photograph of [Subject: a bold red T-shirt streetwear look], [Lighting: urban afternoon light], [Backdrop: a restrained editorial setting], natural textures, thoughtful composition, realistic color, magazine photography.",
       "variables": [
         {
           "key": "Subject",
-          "default_value": "a contemporary denim outfit",
+          "default_value": "a bold red T-shirt streetwear look",
           "suggestions": []
         },
         {
@@ -989,14 +988,14 @@
         },
         {
           "key": "Backdrop",
-          "default_value": "a clean architectural setting",
+          "default_value": "a restrained editorial setting",
           "suggestions": []
         }
       ],
       "outputs": [
         {
           "model": "gemini_nano_banana",
-          "image_url": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }
@@ -1044,7 +1043,7 @@
       "outputs": [
         {
           "model": "flux",
-          "image_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }
@@ -1067,16 +1066,16 @@
       "id": "pv_024",
       "title": "Natural confidence",
       "category": "women",
-      "raw_prompt": "Fashion editorial photograph of [Subject: a natural lifestyle portrait], [Lighting: open shade daylight], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "raw_prompt": "Editorial photograph of [Subject: an expressive close editorial portrait], [Lighting: soft directional window light], [Backdrop: a restrained editorial setting], natural textures, thoughtful composition, realistic color, magazine photography.",
       "variables": [
         {
           "key": "Subject",
-          "default_value": "a natural lifestyle portrait",
+          "default_value": "an expressive close editorial portrait",
           "suggestions": []
         },
         {
           "key": "Lighting",
-          "default_value": "open shade daylight",
+          "default_value": "soft directional window light",
           "suggestions": [
             "Softbox studio",
             "Neon reflections",
@@ -1085,14 +1084,14 @@
         },
         {
           "key": "Backdrop",
-          "default_value": "a clean architectural setting",
+          "default_value": "a restrained editorial setting",
           "suggestions": []
         }
       ],
       "outputs": [
         {
           "model": "midjourney",
-          "image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }
@@ -1113,18 +1112,18 @@
     },
     {
       "id": "pv_025",
-      "title": "Texture and tailoring",
+      "title": "The boutique edit",
       "category": "fashion",
-      "raw_prompt": "Fashion editorial photograph of [Subject: a textured wool coat], [Lighting: directional winter light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "raw_prompt": "Editorial photograph of [Subject: a carefully arranged menswear boutique display], [Lighting: warm interior lighting], [Backdrop: a restrained editorial setting], natural textures, thoughtful composition, realistic color, magazine photography.",
       "variables": [
         {
           "key": "Subject",
-          "default_value": "a textured wool coat",
+          "default_value": "a carefully arranged menswear boutique display",
           "suggestions": []
         },
         {
           "key": "Lighting",
-          "default_value": "directional winter light",
+          "default_value": "warm interior lighting",
           "suggestions": [
             "Softbox studio",
             "Neon reflections",
@@ -1133,14 +1132,14 @@
         },
         {
           "key": "Backdrop",
-          "default_value": "a clean architectural setting",
+          "default_value": "a restrained editorial setting",
           "suggestions": []
         }
       ],
       "outputs": [
         {
           "model": "chatgpt_4o",
-          "image_url": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }
@@ -1161,18 +1160,18 @@
     },
     {
       "id": "pv_026",
-      "title": "Athletic editorial",
+      "title": "The analog portrait",
       "category": "men",
-      "raw_prompt": "Fashion editorial photograph of [Subject: a premium athletic outfit], [Lighting: high contrast stadium light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "raw_prompt": "Editorial photograph of [Subject: a young creative in a wide-brimmed hat], [Lighting: soft overcast daylight], [Backdrop: a restrained editorial setting], natural textures, thoughtful composition, realistic color, magazine photography.",
       "variables": [
         {
           "key": "Subject",
-          "default_value": "a premium athletic outfit",
+          "default_value": "a young creative in a wide-brimmed hat",
           "suggestions": []
         },
         {
           "key": "Lighting",
-          "default_value": "high contrast stadium light",
+          "default_value": "soft overcast daylight",
           "suggestions": [
             "Softbox studio",
             "Neon reflections",
@@ -1181,14 +1180,14 @@
         },
         {
           "key": "Backdrop",
-          "default_value": "a clean architectural setting",
+          "default_value": "a restrained editorial setting",
           "suggestions": []
         }
       ],
       "outputs": [
         {
           "model": "gemini_nano_banana",
-          "image_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }
@@ -1211,11 +1210,11 @@
       "id": "pv_027",
       "title": "Summer color study",
       "category": "women",
-      "raw_prompt": "Fashion editorial photograph of [Subject: a vibrant summer outfit], [Lighting: bright diffused sunlight], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "raw_prompt": "Editorial photograph of [Subject: a colorful editorial beauty portrait], [Lighting: bright diffused sunlight], [Backdrop: a restrained editorial setting], natural textures, thoughtful composition, realistic color, magazine photography.",
       "variables": [
         {
           "key": "Subject",
-          "default_value": "a vibrant summer outfit",
+          "default_value": "a colorful editorial beauty portrait",
           "suggestions": []
         },
         {
@@ -1229,14 +1228,14 @@
         },
         {
           "key": "Backdrop",
-          "default_value": "a clean architectural setting",
+          "default_value": "a restrained editorial setting",
           "suggestions": []
         }
       ],
       "outputs": [
         {
           "model": "flux",
-          "image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }
@@ -1257,18 +1256,18 @@
     },
     {
       "id": "pv_028",
-      "title": "Accessories in focus",
-      "category": "fashion",
-      "raw_prompt": "Fashion editorial photograph of [Subject: a refined accessories collection], [Lighting: controlled studio highlights], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "title": "The copper portrait",
+      "category": "women",
+      "raw_prompt": "Editorial photograph of [Subject: a copper-haired editorial portrait], [Lighting: warm window light], [Backdrop: a restrained editorial setting], natural textures, thoughtful composition, realistic color, magazine photography.",
       "variables": [
         {
           "key": "Subject",
-          "default_value": "a refined accessories collection",
+          "default_value": "a copper-haired editorial portrait",
           "suggestions": []
         },
         {
           "key": "Lighting",
-          "default_value": "controlled studio highlights",
+          "default_value": "warm window light",
           "suggestions": [
             "Softbox studio",
             "Neon reflections",
@@ -1277,14 +1276,14 @@
         },
         {
           "key": "Backdrop",
-          "default_value": "a clean architectural setting",
+          "default_value": "a restrained editorial setting",
           "suggestions": []
         }
       ],
       "outputs": [
         {
           "model": "midjourney",
-          "image_url": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1526510747491-58f928ec870f?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }
@@ -1292,7 +1291,7 @@
       "is_pro_only": false,
       "likes_count": 0,
       "tags": [
-        "fashion",
+        "women",
         "editorial",
         "starter"
       ],
@@ -1332,7 +1331,7 @@
       "outputs": [
         {
           "model": "chatgpt_4o",
-          "image_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }
@@ -1380,7 +1379,7 @@
       "outputs": [
         {
           "model": "gemini_nano_banana",
-          "image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80",
+          "image_url": "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80",
           "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
           "aspect_ratio": 0.8
         }

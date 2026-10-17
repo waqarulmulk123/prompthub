@@ -39,7 +39,9 @@ class PromptOutput {
         ratio > 4 ||
         !ratio.isFinite ||
         url.scheme != 'https' ||
-        url.host.isEmpty) {
+        url.host != 'images.unsplash.com' ||
+        url.userInfo.isNotEmpty ||
+        url.hasPort) {
       throw const FormatException('Invalid catalog image');
     }
     return PromptOutput(
@@ -66,6 +68,33 @@ class PromptOutput {
     'aspect_ratio': aspectRatio,
     'blur_hash': blurHash,
   };
+}
+
+// Ignore delivery transforms when comparing the same source photograph.
+List<PromptItem> uniquePrompts(Iterable<PromptItem> items) {
+  final ids = <String>{}, prompts = <String>{}, images = <String>{};
+  final result = <PromptItem>[];
+  for (final item in items) {
+    final text = item.rawPrompt
+        .trim()
+        .replaceAll(RegExp(r'\s+'), ' ')
+        .toLowerCase();
+    final keys = item.outputs.map((o) {
+      final url = Uri.parse(o.imageUrl);
+      return '${url.origin}${url.path.replaceFirst(RegExp(r'/+$'), '')}';
+    }).toList();
+    if (ids.contains(item.id) ||
+        (text.isNotEmpty && prompts.contains(text)) ||
+        keys.toSet().length != keys.length ||
+        keys.any(images.contains)) {
+      continue;
+    }
+    ids.add(item.id);
+    if (text.isNotEmpty) prompts.add(text);
+    images.addAll(keys);
+    result.add(item);
+  }
+  return result;
 }
 
 class PromptItem {
@@ -99,7 +128,8 @@ class PromptItem {
         .map((e) => PromptOutput.fromJson(Map<String, dynamic>.from(e as Map)))
         .toList();
     final id = json['id'] as String;
-    if (id.isEmpty || outputs.isEmpty) {
+    if (id.isEmpty ||
+        (outputs.isEmpty && !RegExp(r'^drop_[0-9]{8}_[1-3]$').hasMatch(id))) {
       throw const FormatException('Invalid prompt');
     }
     return PromptItem(

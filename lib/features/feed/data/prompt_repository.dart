@@ -43,7 +43,7 @@ class PromptRemoteDatasource {
         items.addAll(decode(shard.data));
       }
     }
-    return items;
+    return uniquePrompts(items);
   }
 
   Future<List<PromptItem>> bundled() async => decode(

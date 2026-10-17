@@ -8,7 +8,7 @@ Deno.serve(async (request: Request) => {
   const key = Deno.env.get('GEMINI_API_KEY');
   if (!key) return json({error: 'Image analysis is not configured yet'}, 503);
   let body;
-  try { body = JSON.parse(await readBody(request, 8000000)); } catch { return json({error: 'Invalid image request'}, 400); }
+  try { body = JSON.parse(await readBody(request, 8000000)); if (!body || typeof body !== 'object' || Array.isArray(body)) throw Error(); } catch { return json({error: 'Invalid image request'}, 400); }
   if (!['image/png','image/jpeg','image/webp'].includes(body.mime_type) || typeof body.image_base64 !== 'string' ||
     body.image_base64.length < 64 || body.image_base64.length > 7500000 || !/^[A-Za-z0-9+/]*={0,2}$/.test(body.image_base64)) return json({error: 'Unsupported image'}, 400);
   let reservation: string;

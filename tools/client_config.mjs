@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 // An allowlist prevents server secrets from entering Flutter's public bundle.
 const allowed = ['SUPABASE_URL', 'SUPABASE_PUBLISHABLE_KEY', 'CATALOG_BASE_URL',
-  'REVENUECAT_ANDROID_PUBLIC_KEY', 'REVENUECAT_IOS_PUBLIC_KEY', 'WEB_CHECKOUT_URL', 'GOOGLE_AUTH_ENABLED', 'APPLE_AUTH_ENABLED'];
+  'REVENUECAT_ANDROID_PUBLIC_KEY', 'REVENUECAT_IOS_PUBLIC_KEY', 'WEB_CHECKOUT_URL', 'GOOGLE_AUTH_ENABLED', 'APPLE_AUTH_ENABLED', 'ONESIGNAL_APP_ID', 'ONESIGNAL_NATIVE_READY'];
 const values = {};
 let text = '';
 try { text = readFileSync('.env', 'utf8'); } catch (e) { if (e.code !== 'ENOENT') throw e; }

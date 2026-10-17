@@ -7,7 +7,7 @@ for(const table of ['collections','saved_prompts','entitlements','brand_dna','co
   const response=await fetch(`${base}/rest/v1/${table}?select=*`,{headers:{apikey:key}});
   assert([401,403].includes(response.status),`Anonymous access must fail for ${table}`);
 }
-for(const name of ['reverse-prompt','create-checkout','boost-prompt','community-remixes']) {
+for(const name of ['reverse-prompt','create-checkout','boost-prompt','community-remixes','delete-account']) {
   const response=await fetch(`${base}/functions/v1/${name}`,{method:'POST',headers:{apikey:key,'Content-Type':'application/json'},body:'{}'});
   assert.equal(response.status,401,`${name} must reject unsigned requests`);
 }

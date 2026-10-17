@@ -58,12 +58,15 @@ class _FeedScreenState extends ConsumerState<FeedScreen> {
                       children: [
                         const Icon(Icons.auto_awesome, color: AppTheme.accent),
                         const SizedBox(width: 10),
-                        Text(
-                          'PromptVault',
-                          style: Theme.of(context).textTheme.titleLarge
-                              ?.copyWith(fontWeight: FontWeight.w800),
+                        Expanded(
+                          child: Text(
+                            'PromptVault',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.titleLarge
+                                ?.copyWith(fontWeight: FontWeight.w800),
+                          ),
                         ),
-                        const Spacer(),
                         // onesignal:managed v1 — permission only after a deliberate tap.
                         if (PushService.available)
                           IconButton(

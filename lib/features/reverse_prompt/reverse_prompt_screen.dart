@@ -11,6 +11,10 @@ import '../auth/auth_service.dart';
 import '../subscription/pro_paywall_screen.dart';
 
 Uint8List resizeReference(Uint8List bytes) {
+  final info = img.findDecoderForData(bytes)?.startDecode(bytes);
+  if (info == null || info.width * info.height > 25000000) {
+    throw const FormatException('Unsupported image or dimensions too large');
+  }
   final image = img.decodeImage(bytes);
   if (image == null) throw const FormatException('Unsupported image');
   final resized = image.width > 1024 || image.height > 1024
@@ -21,7 +25,9 @@ Uint8List resizeReference(Uint8List bytes) {
         )
       : image;
   // PNG is supported across the image package, browsers and Gemini; no fake WebP encoding.
-  return Uint8List.fromList(img.encodePng(resized));
+  final clean = img.Image(width: resized.width, height: resized.height);
+  img.compositeImage(clean, resized);
+  return Uint8List.fromList(img.encodePng(clean));
 }
 
 class ReversePromptScreen extends ConsumerStatefulWidget {
@@ -44,12 +50,23 @@ class _ReversePromptState extends ConsumerState<ReversePromptScreen> {
       );
       return;
     }
-    final file = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-      maxWidth: 1024,
-      maxHeight: 1024,
-      imageQuality: 85,
-    );
+    XFile? file;
+    try {
+      file = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 1024,
+        maxHeight: 1024,
+        imageQuality: 85,
+      );
+    } catch (_) {
+      if (mounted) {
+        setState(
+          () => _error =
+              'Photo access is unavailable. Check your device permissions.',
+        );
+      }
+      return;
+    }
     if (file == null || !mounted) return;
     setState(() {
       _busy = true;

@@ -11,6 +11,11 @@ val releasePropertiesFile = rootProject.file("key.properties")
 if (releasePropertiesFile.exists()) {
     releasePropertiesFile.inputStream().use { releaseProperties.load(it) }
 }
+if (gradle.startParameter.taskNames.any { it.contains("release", ignoreCase = true) }) {
+    require(releasePropertiesFile.exists()) { "Release signing requires the local android/key.properties file." }
+    require(listOf("storeFile", "storePassword", "keyAlias", "keyPassword").all { !releaseProperties.getProperty(it).isNullOrBlank() }) { "Release signing configuration is incomplete." }
+    require(file(releaseProperties.getProperty("storeFile")).exists()) { "Release keystore is missing." }
+}
 
 android {
     namespace = "com.waqarulmulk.promptvault"
@@ -23,7 +28,6 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.waqarulmulk.promptvault"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.

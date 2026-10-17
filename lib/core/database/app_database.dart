@@ -43,10 +43,17 @@ class AppDatabase extends _$AppDatabase {
       );
   AppDatabase.forTesting(super.executor);
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
+    onUpgrade: (m, from, to) async {
+      if (from < 2) {
+        // Rebuild only the public catalog; private bookmarks stay intact.
+        await delete(cachedPromptsTable).go();
+        await customStatement('DELETE FROM prompt_search');
+      }
+    },
     onCreate: (m) async {
       await m.createAll();
       await customStatement(
@@ -60,6 +67,7 @@ class AppDatabase extends _$AppDatabase {
 
   Future<void> cachePrompts(List<PromptItem> items, {bool replace = false}) =>
       transaction(() async {
+        items = uniquePrompts(items);
         if (replace) {
           await delete(cachedPromptsTable).go();
           await customStatement('DELETE FROM prompt_search');

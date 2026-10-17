@@ -298,8 +298,9 @@ class _PromptStudioState extends ConsumerState<PromptStudioScreen> {
           final compiled = _brandEnabled && pro && brand != null
               ? brand.apply(template, values)
               : PromptParser.compile(template, values);
-          final selected =
-              prompt.outputs[_output.clamp(0, prompt.outputs.length - 1)];
+          final selected = prompt.outputs.isEmpty
+              ? null
+              : prompt.outputs[_output.clamp(0, prompt.outputs.length - 1)];
           final preview = RepaintBoundary(
             key: _shareKey,
             child: ColoredBox(
@@ -307,10 +308,11 @@ class _PromptStudioState extends ConsumerState<PromptStudioScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(18),
-                    child: PromptImage(output: selected),
-                  ),
+                  if (selected != null)
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(18),
+                      child: PromptImage(output: selected),
+                    ),
                   Padding(
                     padding: const EdgeInsets.all(20),
                     child: Column(
@@ -322,7 +324,11 @@ class _PromptStudioState extends ConsumerState<PromptStudioScreen> {
                               ?.copyWith(fontWeight: FontWeight.w800),
                         ),
                         const SizedBox(height: 8),
-                        Text(modelNames[selected.model] ?? selected.model),
+                        Text(
+                          selected == null
+                              ? 'Original daily prompt · Text edition'
+                              : modelNames[selected.model] ?? selected.model,
+                        ),
                         if (!locked) ...[
                           const SizedBox(height: 14),
                           Text(

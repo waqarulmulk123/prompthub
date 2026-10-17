@@ -74,6 +74,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(path: '/reverse', builder: (_, _) => const ReversePromptScreen()),
       GoRoute(path: '/login-callback', redirect: (_, _) => '/profile'),
+      GoRoute(
+        path: '/delete-account',
+        builder: (_, _) => const ProfileScreen(deletionPage: true),
+      ),
     ],
     errorBuilder: (context, state) => Scaffold(
       appBar: AppBar(title: const Text('Page not found')),

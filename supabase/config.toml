@@ -430,3 +430,6 @@ verify_jwt = false
 verify_jwt = false
 [functions.daily-notify]
 verify_jwt = false
+
+[functions.delete-account]
+verify_jwt = true

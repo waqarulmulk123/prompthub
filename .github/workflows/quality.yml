@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
       - name: Install pinned Flutter
         run: |
           git clone --depth 1 --branch 3.47.7 https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
@@ -18,9 +21,20 @@ jobs:
       - run: flutter analyze --fatal-infos
       - run: flutter test
       - run: node tools/client_config.mjs
+        env:
+          SUPABASE_URL: https://wtzpoahcqyxayxvumneu.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_Hv0Axk3gTO0Uhh-DMgRfUQ_YfEqdVC8
+          CATALOG_BASE_URL: https://promptvault-catalog.pages.dev
       - run: node tools/config_test.mjs
       - run: node --test tools/catalogHealth.test.mjs
+      - run: node --test tools/backend_edge.test.mjs
       - run: flutter build web --wasm --dart-define-from-file=config/client.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: web-release
+          path: build/web
+          retention-days: 3
+      - run: flutter build apk --debug --no-pub --dart-define-from-file=config/client.json
   bend:
     runs-on: ubuntu-latest
     steps:
@@ -33,3 +47,8 @@ jobs:
           bend PROOF.bend
           bend catalog_policy.bend -o tools/catalog_policy.mjs
           node tools/ingest_catalog.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: bend-policy
+          path: tools/catalog_policy.mjs
+          retention-days: 3

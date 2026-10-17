@@ -1,0 +1,39 @@
+# PromptVault AI production audit — 2026-10-17
+
+What this repo does: a Flutter client browses a static prompt catalog, customizes text, opens external AI tools, and stores private creator data in Supabase. Daily claims, quotas, Pro access and moderated remixes are server-authoritative. The review assumes the PRD's intended public multi-user service; its 50,000-user, zero-cost and frame-rate targets have not been established by load tests.
+
+## Scope
+
+Reviewed the PRD and phase instructions, feature entry points and callers, routes, persistence, authentication, subscriptions, image processing, ingestion, Edge Functions, SQL ownership/grants/quotas, background jobs, Android configuration/signing, workflows and tests. The inventory covers the app, Android/iOS source, web, catalog, tools, SQL, documentation and dependency lockfile. Generated Drift code, SDK internals and binary assets were inspected only where relevant; this is not an independent audit of every third-party dependency.
+
+## Fixed findings
+
+1. **Repeated photos and prompt aliases could be published.** The initial 30-entry catalog reused several photographs, and the importer compared only IDs. The catalog now uses 30 distinct reviewed references. Ingestion rejects duplicate IDs, normalized text, canonical source paths and byte-identical images under different URLs. The Flutter cache also filters duplicates; its public-cache migration preserves private bookmarks.
+2. **Some templates did not match their reference subject.** Visual review found portrait photos under typography/3D labels and clothing photos under unrelated titles. Categories and original template text were corrected. The interface explicitly labels references as illustrative; they are not claimed to be actual model outputs.
+3. **Account deletion was absent.** Added an in-app confirmation and public web deletion resource, plus an authenticated endpoint that derives ownership from the session, removes stored remix files, then deletes Auth and cascades app records. A live disposable-user test proved removal of account, bookmarks, remix row and stored object, and rejection of the old session. Local bookmark data is cleared on sign-out/deletion.
+4. **Payment providers overwrote each other's access.** A later expiry from one provider could revoke another active subscription. Provider states are now stored separately and combined, with per-provider event ordering and duplicate protection. Webhooks cannot recreate a deleted account. SQL tests cover mixed providers, stale/duplicate events and deletion.
+5. **Daily drops recycled a finite pool indefinitely.** Fresh drops now exclude previously published normalized text. When fewer than three reviewed entries remain, the feature stays hidden instead of relabeling old prompts as new. Daily text editions no longer reuse discovery photos. Historical claims remain intact. The steady read path avoids acquiring the global creation lock after a drop already exists.
+6. **Malformed JSON could crash two endpoints.** Null/scalar/array bodies now return client errors before property access. Tests exercise those inputs through the actual function handlers.
+7. **Reverse-image preparation lacked a decoded-pixel bound and a clean metadata-free output.** Added dimension checks and a fresh output canvas. Picker failures now produce a recoverable message. Tests check malformed images, resize bounds and metadata removal.
+8. **Boards were labels without browsing behavior.** Board chips now filter saved bookmarks. A widget test verifies switching between a board and all saved prompts.
+9. **Verified purchases could leave the UI showing old access.** The native paywall waits briefly for trusted server verification, account resume refreshes access, and a manual plan refresh is available. The native Manage plan button opens store subscription settings. No client purchase result directly grants Pro.
+10. **Android release safeguards and presentation were incomplete.** Release signing now fails when local key settings are absent/incomplete. Backup and cleartext HTTP are disabled. Native vector/adaptive branding replaces the default launcher. Build memory and worker limits were reduced after this host exhausted its paging file.
+11. **Four ownership relationships lacked indexes.** Added indexes for blocked creators, report owners, claim days and weekly winners to support account cleanup and moderation.
+12. **No native end-to-end smoke test existed.** Added an Android integration test covering real app startup, 10/20/30 pagination, unique image IDs, Quick Inspire, guest collections and account/privacy entry points. It saves an Android home screenshot through the Flutter test driver.
+
+## Must complete before public launch
+
+13. **Vendor configuration remains incomplete.** Production SMTP/OAuth, actual Play/RevenueCat products, merchant checkout, Firebase FCM credentials, and real push delivery are not available from the connected project configuration. The owner previously said these products did not exist. Do not advertise functional billing or native push until vendor sandbox/device tests pass. See [service setup](SERVICES.md) and [Android release handoff](ANDROID_RELEASE.md).
+14. **A licensed, reviewed live-trend inventory is not connected.** The current catalog is original starter content. The PRD's sources were probed and unsuitable inputs remain disabled; [source audit](SOURCE_AUDIT.md) records availability and rights issues. Daily inventory needs ongoing editorial replenishment. There is no verified multi-model comparison dataset or populated commercial Pro-pack catalog yet; the UI/backend support those records but must not fabricate them.
+15. **Automated catalog publication needs its deployment credential.** The GitHub workflow is implemented; its scoped Cloudflare Actions credential is still absent. The intended Vercel deployment also returned a permission error. Cloudflare manual publication is available. This is an operations gap, not evidence that scheduled publication is running.
+16. **Performance, store and hardware acceptance remain separate checks.** Release builds and automated tests cannot prove the PRD's download-size, cold-start, 120 fps, 50,000-user or $0 cost targets. iOS signing/device testing cannot run on this Windows host. Store declarations and the operator's policy text need owner review against the final configured services.
+
+## Evidence and limits
+
+Unit/widget tests cover editing, parsing, quotas, cache privacy, duplicate filtering, responsive shells, Brand DNA, image processing, board filtering and delayed server verification. Backend handler tests cover deletion ownership/order/failure and malformed input. Live API smoke checks cover authentication boundaries and real account/storage deletion. Transactional SQL checks cover ownership, claims, rewards, quotas, votes, moderation and payment ordering. The final release notes record actual build/device/CI outcomes rather than assuming success from source inspection.
+
+Windows WSL failed to start its VM during this audit, so local Bend proof attempts returned a host error. The existing compiled Bend eligibility policy is used by ingestion, and new uniqueness laws use that same Boolean composition. Linux CI runs `bend PROOF.bend` and regenerates the policy module; its result must be checked for the final commit. No host restart or unrelated user process was forced to work around WSL.
+
+Verdict: the audit fixes concrete code and data defects, but the app must not be described as ready for an unrestricted paid public launch until the remaining vendor, content and acceptance gates above are satisfied.
+
+Not checked: independent third-party SDK security review, legal review, real store charges/renewals, push delivery to a subscribed device, Apple signing, accessibility on physical assistive devices, and sustained production load.

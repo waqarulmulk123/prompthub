@@ -3,7 +3,7 @@ const storageHeaders=()=>({apikey:env('SUPABASE_SERVICE_ROLE_KEY'),Authorization
 Deno.serve(async(request:Request)=>{
  if(request.method==='OPTIONS')return new Response('ok',{headers:cors});
  if(request.method!=='POST')return json({error:'Method not allowed'},405);
- let body;try{body=JSON.parse(await readBody(request,2800000));}catch{return json({error:'Invalid request'},400);}
+ let body;try{body=JSON.parse(await readBody(request,2800000));if(!body||typeof body!=='object'||Array.isArray(body))throw Error();}catch{return json({error:'Invalid request'},400);}
  if(body.action==='list'){
   if(typeof body.prompt_id!=='string'||body.prompt_id.length>100)return json({error:'Invalid prompt'},400);
   let authorization;try{authorization=(await authenticate(request)).authorization;}catch{/* Public approved gallery. */}

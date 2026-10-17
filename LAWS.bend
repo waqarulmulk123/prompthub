@@ -17,6 +17,16 @@ law free_text_preserved:
   for +text: String
   {Policy.public_text(False{}, text) == text : String}
 
+law duplicate_image_rejected:
+  for id_unique: Bool
+  for prompt_unique: Bool
+  {Policy.publishable(id_unique, Policy.publishable(prompt_unique, False{})) == False{} : Bool}
+
+law duplicate_prompt_rejected:
+  for id_unique: Bool
+  for image_unique: Bool
+  {Policy.publishable(id_unique, Policy.publishable(False{}, image_unique)) == False{} : Bool}
+
 # Server engagement invariants are exercised transactionally in supabase/engagement_security_test.sql:
 # one claim per server day; one reward per seven consecutive claims; permanent private claims;
 # quota reservations refund on provider failure; private Brand DNA; reviewed remixes; unique votes.

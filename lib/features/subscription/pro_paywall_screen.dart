@@ -29,6 +29,18 @@ class _ProPaywallState extends ConsumerState<ProPaywallScreen> {
     });
     try {
       await action();
+      if (!mounted) return;
+      // The trusted webhook may arrive after the store SDK completes.
+      if (!kIsWeb) {
+        for (var attempt = 0; attempt < 5 && mounted; attempt++) {
+          if (await ref.refresh(entitlementProvider.future)) {
+            break;
+          }
+          if (attempt < 4)
+            await Future<void>.delayed(const Duration(seconds: 2));
+        }
+      }
+      if (!mounted) return;
       if (mounted) {
         setState(
           () => _message = 'Store request complete. Your access will update after verification.',

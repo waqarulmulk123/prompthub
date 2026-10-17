@@ -14,7 +14,7 @@ class TestFeed extends FeedNotifier {
 
 void main() {
   setUpAll(() => GoogleFonts.config.allowRuntimeFetching = false);
-  for (final width in [390.0, 1440.0]) {
+  for (final width in [320.0, 390.0, 1440.0]) {
     testWidgets('Discovery shell adapts at $width pixels', (tester) async {
       tester.view.physicalSize = Size(width, 900);
       tester.view.devicePixelRatio = 1;

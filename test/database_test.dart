@@ -13,6 +13,40 @@ void main() {
   });
   tearDown(() => db.close());
   test(
+    'public cache rejects repeated prompts and transformed copies of images',
+    () async {
+      final source =
+          (jsonDecode(
+                    File('assets/catalog/feed_page_1.json').readAsStringSync(),
+                  )['prompts']
+                  as List)
+              .cast<Map<String, dynamic>>();
+      final first = PromptItem.fromJson(source.first);
+      final sameText = PromptItem.fromJson({
+        ...source[1],
+        'id': 'pv_duplicate_text',
+        'raw_prompt': '  ${first.rawPrompt.toUpperCase()}   ',
+      });
+      final sameImage = PromptItem.fromJson({
+        ...source[2],
+        'id': 'pv_duplicate_image',
+        'outputs': [
+          {
+            ...((source.first['outputs'] as List).first as Map),
+            'image_url': '${first.outputs.first.imageUrl}&w=320',
+          },
+        ],
+      });
+      await db.cachePrompts([
+        first,
+        sameText,
+        sameImage,
+        PromptItem.fromJson(source[3]),
+      ], replace: true);
+      expect(await db.search(limit: 100), hasLength(2));
+    },
+  );
+  test(
     'guest customization allowance persists and rejects the fourth edit',
     () async {
       await db.consumeGuestCustomization();
@@ -69,7 +103,7 @@ void main() {
       outputs: const [
         PromptOutput(
           model: 'flux',
-          imageUrl: 'https://example.com/preview.webp',
+          imageUrl: 'https://images.unsplash.com/preview.webp',
           aspectRatio: 1,
           blurHash: '',
         ),
