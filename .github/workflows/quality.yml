@@ -26,6 +26,7 @@ jobs:
           SUPABASE_PUBLISHABLE_KEY: sb_publishable_Hv0Axk3gTO0Uhh-DMgRfUQ_YfEqdVC8
           CATALOG_BASE_URL: https://promptvault-catalog.pages.dev
       - run: node tools/config_test.mjs
+      - run: flutter test test/managed_catalog_test.dart --dart-define-from-file=config/client.json
       - run: node --test tools/catalogHealth.test.mjs
       - run: node --test tools/backend_edge.test.mjs
       - run: node --test tools/prepare_private_content.test.mjs
@@ -39,6 +40,54 @@ jobs:
           path: build/web
           retention-days: 3
       - run: flutter build apk --debug --no-pub --dart-define-from-file=config/client.json
+  android-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - name: Install pinned Flutter
+        run: |
+          git clone --depth 1 --branch 3.47.7 https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
+          echo "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+      - run: node tools/bootstrap_assets.mjs
+      - run: flutter pub get
+      - run: node tools/client_config.mjs
+        env:
+          SUPABASE_URL: https://wtzpoahcqyxayxvumneu.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_Hv0Axk3gTO0Uhh-DMgRfUQ_YfEqdVC8
+          CATALOG_BASE_URL: https://promptvault-catalog.pages.dev
+      - name: Generate disposable CI signing key
+        run: |
+          keytool -genkeypair -noprompt -keystore "$RUNNER_TEMP/smoke.jks" -storepass ci-smoke-only -keypass ci-smoke-only -alias smoke -keyalg RSA -keysize 2048 -validity 2 -dname 'CN=CI smoke test'
+          printf 'storeFile=%s\nstorePassword=ci-smoke-only\nkeyAlias=smoke\nkeyPassword=ci-smoke-only\n' "$RUNNER_TEMP/smoke.jks" > android/key.properties
+      - run: flutter build apk --release --target-platform android-x64 --dart-define-from-file=config/client.json
+      - name: Enable emulator hardware acceleration
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Launch optimized Android release
+        uses: reactivecircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d
+        with:
+          api-level: 36
+          target: google_apis
+          arch: x86_64
+          ram-size: 2048M
+          cores: 2
+          disable-animations: true
+          script: bash tools/android_release_smoke.sh
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: android-release-smoke
+          path: build/release-smoke
+          retention-days: 3
+      - name: Remove disposable signing material
+        if: always()
+        run: rm -f android/key.properties "$RUNNER_TEMP/smoke.jks"
   bend:
     runs-on: ubuntu-latest
     steps:

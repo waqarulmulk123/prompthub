@@ -25,7 +25,7 @@ Reviewed the PRD and phase instructions, feature entry points and callers, route
 14. **Native push initialized before credentials were ready.** The native wrapper now honors the readiness flag and stays inactive until FCM/APNs are configured.
 15. **Filled button contrast was too low.** The primary action color now meets 4.5:1 contrast with white text, checked by a small theme test.
 
-16. **Release shrinking broke WorkManager startup.** A signed release install exposed a Room reflection failure before Flutter started. Explicit keep rules preserve WorkDatabase and its generated implementation; the signed release is rebuilt and tested before delivery.
+16. **Release shrinking broke WorkManager startup.** A signed release install exposed a Room reflection failure before Flutter started. Explicit keep rules preserve WorkDatabase and its generated implementation. A separate CI job builds an optimized release with a disposable test key, installs it on Android 36, and checks that its activity and process survive startup. Signed delivery artifacts still require their recorded acceptance checks.
 17. **Owner publishing was missing.** Added a separate MFA-protected administration portal with private media uploads, database publication, category and daily inventory management, moderation, promotional grants, user deletion and activity logs. Invitation enrollment avoids depending on the missing SMTP service.
 
 ## Must complete before public launch
