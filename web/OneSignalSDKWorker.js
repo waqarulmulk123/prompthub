@@ -1,0 +1,2 @@
+// onesignal:managed v1
+importScripts('https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js');

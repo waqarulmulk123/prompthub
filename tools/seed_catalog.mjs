@@ -1,0 +1,51 @@
+import { mkdirSync, writeFileSync } from 'node:fs';
+
+// Original prompt templates. Photos are illustrative references, not verified model outputs.
+const entries = [
+  ['The quiet luxury campaign','product_ads','1523275335684-37898b6baf30',0.8,'Commercial studio photograph of [Product: a silver wristwatch] on [Surface: warm travertine], [Lighting: soft directional daylight], elegant negative space, 85mm lens, subtle film grain.'],
+  ['A world in a glass bottle','product_ads','1541643600914-78b084683601',0.8,'Premium campaign for [Product: a sculptural perfume bottle], surrounded by [Details: delicate botanical shadows], [Palette: amber and warm cream], macro detail, cinematic studio light.'],
+  ['Beyond the ordinary','portraits','1534528741775-53994a69daeb',0.75,'Editorial portrait of [Subject: a creative director], [Lighting: soft window light], [Backdrop: a charcoal studio], authentic skin texture, 85mm portrait lens, restrained magazine composition.'],
+  ['A little escape','thumbnails','1469474968028-56623f02e42e',1.5,'Cinematic YouTube thumbnail showing [Scene: dramatic alpine peaks] under [Weather: early morning mist], bold foreground silhouette, [Mood: breathtaking scale], clean space for a short headline.'],
+  ['Fresh by design','product_ads','1608571423902-eed4a5ad8108',0.8,'Minimal product ad for [Product: a botanical skincare serum], [Surface: pale limestone], [Accents: fresh green leaves], diffused daylight, tactile packaging, premium editorial finish.'],
+  ['Rooms that breathe','ui_design','1600210492486-724fe5c67fb0',1.5,'Design a responsive website hero for [Brand: a contemporary interiors studio], with [Palette: warm neutrals], generous editorial typography, a full-width architectural photograph and clear accessible navigation.'],
+  ['Golden hour, bottled','product_ads','1547887538-e3a2f32cb1cc',0.75,'Luxury editorial still life featuring [Product: a golden fragrance bottle], [Lighting: a sharp late-afternoon sunbeam], [Surface: honey-colored stone], long geometric shadows, rich material detail.'],
+  ['The weekend collection','fashion','1483985988355-763728e1935b',0.8,'Create a visual identity concept for [Brand: WEEKEND CLUB], a [Industry: independent fashion label], [Style: understated typographic wordmark], [Palette: ink black and ivory], flat vector, no mockup.'],
+  ['Built for the spotlight','3d_icons','1486406146926-c627a92ad1ab',0.8,'Isometric 3D icon of [Object: a miniature architectural tower], [Material: frosted glass and brushed aluminum], [Palette: electric indigo and silver], soft ambient occlusion, transparent background.'],
+  ['Something worth saying','typography','1506794778202-cad84cf45f1d',0.8,'Editorial typography poster reading [Headline: MAKE ROOM FOR IDEAS], [Style: expressive condensed lettering], [Palette: cobalt blue and off-white], dramatic hierarchy, precise letterforms, print-ready composition.'],
+  ['Still life in motion','product_ads','1503602642458-232111445657',1.0,'Photorealistic campaign of [Product: a sculptural lounge chair], [Setting: a sunlit modern gallery], [Material: natural oak and linen], architectural shadows, wide composition, interior design magazine quality.'],
+  ['A softer kind of future','ui_design','1497366811353-6870744d04b2',1.5,'Design a polished workspace dashboard for [Audience: independent creatives], [Palette: charcoal and lavender], calm information hierarchy, accessible contrast, realistic project cards and generous white space.'],
+  ["Streetwear after dark","fashion","1483985988355-763728e1935b",0.8,"Fashion editorial photograph of [Subject: a layered streetwear outfit], [Lighting: neon city reflections], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+  ["The tailored edit","men","1506794778202-cad84cf45f1d",0.8,"Fashion editorial photograph of [Subject: a tailored linen suit], [Lighting: warm studio daylight], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+  ["Modern muse","women","1534528741775-53994a69daeb",0.8,"Fashion editorial photograph of [Subject: a minimalist evening outfit], [Lighting: soft window light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+  ["Monochrome essentials","fashion","1483985988355-763728e1935b",0.8,"Fashion editorial photograph of [Subject: a monochrome capsule wardrobe], [Lighting: diffused studio light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+  ["Weekend menswear","men","1506794778202-cad84cf45f1d",0.8,"Fashion editorial photograph of [Subject: relaxed weekend menswear], [Lighting: overcast natural light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+  ["The silk story","women","1534528741775-53994a69daeb",0.8,"Fashion editorial photograph of [Subject: a flowing silk dress], [Lighting: golden hour backlight], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+  ["Sneaker campaign","fashion","1483985988355-763728e1935b",0.8,"Fashion editorial photograph of [Subject: a limited edition sneaker], [Lighting: dramatic rim lighting], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+  ["Creative headshot","men","1506794778202-cad84cf45f1d",0.8,"Fashion editorial photograph of [Subject: a creative professional], [Lighting: large softbox lighting], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+  ["Beauty in detail","women","1534528741775-53994a69daeb",0.8,"Fashion editorial photograph of [Subject: a beauty editorial portrait], [Lighting: soft beauty lighting], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+  ["Denim in the city","fashion","1483985988355-763728e1935b",0.8,"Fashion editorial photograph of [Subject: a contemporary denim outfit], [Lighting: urban afternoon light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+  ["The classic profile","men","1506794778202-cad84cf45f1d",0.8,"Fashion editorial photograph of [Subject: a classic menswear portrait], [Lighting: split studio lighting], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+  ["Natural confidence","women","1534528741775-53994a69daeb",0.8,"Fashion editorial photograph of [Subject: a natural lifestyle portrait], [Lighting: open shade daylight], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+  ["Texture and tailoring","fashion","1483985988355-763728e1935b",0.8,"Fashion editorial photograph of [Subject: a textured wool coat], [Lighting: directional winter light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+  ["Athletic editorial","men","1506794778202-cad84cf45f1d",0.8,"Fashion editorial photograph of [Subject: a premium athletic outfit], [Lighting: high contrast stadium light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+  ["Summer color study","women","1534528741775-53994a69daeb",0.8,"Fashion editorial photograph of [Subject: a vibrant summer outfit], [Lighting: bright diffused sunlight], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+  ["Accessories in focus","fashion","1483985988355-763728e1935b",0.8,"Fashion editorial photograph of [Subject: a refined accessories collection], [Lighting: controlled studio highlights], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+  ["Contemporary gentleman","men","1506794778202-cad84cf45f1d",0.8,"Fashion editorial photograph of [Subject: a contemporary formal outfit], [Lighting: cinematic window light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+  ["The editorial cover","women","1534528741775-53994a69daeb",0.8,"Fashion editorial photograph of [Subject: a fashion magazine cover portrait], [Lighting: dramatic beauty lighting], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text."],
+];
+const models = ['chatgpt_4o','gemini_nano_banana','flux','midjourney'];
+const prompts = entries.map(([title,category,photo,ratio,raw_prompt],i) => ({
+  id:`pv_${String(i+1).padStart(3,'0')}`, title, category, raw_prompt,
+  variables:[...raw_prompt.matchAll(/\[([^:\[\]]+):\s*([^\[\]]+)\]/g)].map((m) => ({key:m[1].trim(),default_value:m[2].trim(),suggestions:m[1].trim()==='Lighting'?['Softbox studio','Neon reflections','Natural sunlight']:[]})),
+  outputs:[{model:models[i%models.length],image_url:`https://images.unsplash.com/photo-${photo}?auto=format&fit=crop&w=900&q=80`,blur_hash:'LEHV6nWB2yk8pyo0adR*.7kCMdnj',aspect_ratio:ratio}],
+  is_pro_only:false, likes_count:0, tags:[category,'editorial','starter'],
+  attribution:'Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.',
+  source_url:`https://unsplash.com`, license:'Unsplash License (photo); CC0-1.0 (template)', safety_reviewed:true, verified:false,
+  created_at:'2026-10-17T00:00:00Z',
+}));
+for (const directory of ['assets/catalog','catalog']) {
+  mkdirSync(directory,{recursive:true});
+  writeFileSync(`${directory}/feed_page_1.json`,JSON.stringify({prompts},null,2));
+  writeFileSync(`${directory}/manifest.json`,JSON.stringify({version:1,pages:['feed_page_1.json'],count:prompts.length},null,2));
+}
+console.log(`Created ${prompts.length} attributed starter templates.`);

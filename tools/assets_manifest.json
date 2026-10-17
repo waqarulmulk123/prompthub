@@ -1,0 +1,37 @@
+[
+  {
+    "path": "assets/fonts/Manrope-Regular.ttf",
+    "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk79FO_F.ttf",
+    "sha256": "a13d9b41b0a471ce58f0e46d377fa3cc76615e4632c3b15eb397caadf7a13f0a"
+  },
+  {
+    "path": "assets/fonts/Manrope-Medium.ttf",
+    "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk7PFO_F.ttf",
+    "sha256": "f433e5d333be1128d8ec8a28b8aadd0314d10e14e4105406076666bc830fc15d"
+  },
+  {
+    "path": "assets/fonts/Manrope-SemiBold.ttf",
+    "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk4jE-_F.ttf",
+    "sha256": "6bad1a774228464cc88b8b0271555b266f7a3c64a7bedf15e165fdab4f6ac0ce"
+  },
+  {
+    "path": "assets/fonts/Manrope-Bold.ttf",
+    "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk4aE-_F.ttf",
+    "sha256": "b9584e099e0e7f1e1e914c3037aabb9010c50346a3ce8df5eeeeecc0563044d8"
+  },
+  {
+    "path": "assets/fonts/Manrope-ExtraBold.ttf",
+    "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk59E-_F.ttf",
+    "sha256": "b8f802f05b322a7345805f5b89f8bb976604cc719a91530918d5ce3c47160950"
+  },
+  {
+    "path": "web/drift_worker.dart.js",
+    "url": "https://github.com/simolus3/drift/releases/download/drift-2.35.2/drift_worker.js",
+    "sha256": "191fc9db018d2bbecb1723e81118fcf2c5c094df8644c2fcba2ed51df061e90a"
+  },
+  {
+    "path": "web/sqlite3.wasm",
+    "url": "https://github.com/simolus3/drift/releases/download/drift-2.35.2/sqlite3.wasm",
+    "sha256": "fbcd2e8214f9231ea961e1b7706a22dd1194cfbfe6f26f13841b5aa7a0be1a1f"
+  }
+]

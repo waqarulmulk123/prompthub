@@ -46,3 +46,7 @@ Database ownership, quota and entitlement tests are in `supabase/security_test.s
 See [service setup](docs/SERVICES.md), [implementation status](docs/IMPLEMENTATION.md), and [architecture decisions](docs/IMPLEMENTATION.md#decisions-and-corrections).
 
 App Store / Play Store products, RevenueCat offerings, merchant checkout products, OAuth provider credentials, production SMTP and Apple signing require the owner's accounts. Their absence never unlocks paid features. Performance and cost targets in the PRD require measurements on real devices and live traffic.
+
+## Daily creator features
+
+The home drop unlocks three original templates at 9am New York time. Claim a daily bundle to keep it permanently; seven consecutive claims earn three additional image scans. The account vault separates permanent claims from the Pro archive. Pro members can save a private Brand DNA profile and apply it from the studio. Quick Inspire offers swipe actions and buttons, while Prompt Booster turns a short idea into a detailed Gemini prompt. Community remixes are private until manually reviewed, with report/block controls and verified voting. See docs/SERVICES.md for moderation and notification setup.

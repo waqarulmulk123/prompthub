@@ -1,0 +1,408 @@
+# Product Requirements Document (PRD): PromptVault AI
+
+**Product Name:** PromptVault AI (Working Title)
+
+**Target Market:** United States (Creators, Performance Marketers, E-Commerce Brands, Designers)
+
+**Client Framework:** Flutter 3.47.7 (Stable) & Dart 3.13.5
+
+**Target Platforms:** iOS, Android, and Flutter Web (compiled to WebAssembly / Wasm)
+
+**Backend Architecture:** $0/Month Hybrid Edge-CDN + Serverless Architecture (Scales to 50,000+ Monthly Active Users at zero infrastructure cost)
+
+---
+
+## 1. Executive Summary & Product Vision
+
+**PromptVault AI** is a cross-platform mobile and web SaaS application built in Flutter that curates high-converting, trending AI image prompts paired with their verified visual outputs across **ChatGPT (GPT-4o / GPT-Image-1)**, **Google Gemini (Nano Banana Pro)**, and **Flux / Midjourney**.
+
+Rather than displaying static text that users must manually copy and edit, PromptVault AI turns every prompt into an **interactive, fill-in-the-blank template** with a **1-Click "Open in ChatGPT" and "Open in Gemini" launcher** that injects the customized prompt directly into the user's preferred AI generator.
+
+### Target Audience (US Market Personas)
+
+1. **E-Commerce & DTC Founders:** Need consistent studio product photography, lifestyle ad creatives, and packaging mockups without hiring $2,000/day photo studios.
+2. **Content Creators & YouTubers:** Need high-CTR thumbnails, faceless channel visuals, and viral social media posters with accurate typography.
+3. **Marketing Agencies & Freelancers:** Need repeatable, brand-consistent prompt systems and multi-model comparisons to know whether ChatGPT or Gemini handles a specific visual style better.
+
+---
+
+## 2. Latest 2026 Flutter Tech Stack & `pubspec.yaml` Blueprint
+
+To achieve 120 FPS scrolling performance, zero UI jank during heavy JSON parsing, and full compatibility across iOS, Android, and WebAssembly (Wasm), the application is standardized on the **October 2026 Flutter ecosystem**.
+
+### Core SDK & Rendering Engine
+
+* **Flutter SDK:** `3.47.7` (Stable channel, October 2026) with **Dart `3.13.5**`.
+* **Rendering Engine:** **Impeller** enabled by default on iOS and Android (eliminating shader compilation jank on masonry image grids) and **Skwasm / WebAssembly** on Flutter Web.
+
+### Production Package Selection (Verified Latest Versions)
+
+| Category | Package Name | Latest Version | Architectural Justification |
+| --- | --- | --- | --- |
+| **State Management & Caching** | `flutter_riverpod` | `^3.4.3` | Uses Riverpod 3.x unified `Notifier`/`AsyncNotifier`, built-in offline mutation support, automatic retry, pause/resume lifecycles, and `Ref.mounted` safety. |
+| **Declarative Routing** | `go_router` | `^17.2.3` | Supports deep linking (`promptvault://prompt/:id`), web URL path strategy, and `StatefulShellRoute` for persistent bottom navigation. |
+| **Networking & Isolates** | `dio` | `^5.11.1` | Configured with `FusedTransformer` (automatically offloads JSON decoding larger than 50 KB to a background isolate), `CancelToken` for instant search-as-you-type cancellation, and `QueuedInterceptor`. |
+| **Local Offline SQLite** | `drift_flutter` | `^0.3.1` | Runs SQLite 3.x natively on mobile and `sqlite3.wasm` on web, with `shareAcrossIsolates: true` to run all local queries on a dedicated background isolate. |
+| **Auth & Cloud User DB** | `supabase_flutter` | `^2.18.1` | Handles Apple/Google Sign-In, user profile management, cloud-synced bookmarks, and Pro entitlement verification. |
+| **Image Caching & Wasm** | `cached_network_image` | `^4.0.4` | Upgraded for Flutter 3.44+ and Wasm compatibility (`material_ui`), paired with `flutter_cache_manager: ^3.4.5` and `flutter_blurhash: ^0.9.1`. |
+| **Masonry Feed Layout** | `flutter_staggered_grid_view` | `^0.7.0` | Provides `MasonryGridView.count` for displaying uncropped 1:1, 16:9, and 9:16 AI generated images at 120 FPS. |
+| **AI Deep-Link Launcher** | `url_launcher` | `^6.3.3` | Launches external deep links and universal URLs (`[chatgpt.com/?q=](https://chatgpt.com/?q=)`, `[gemini.google.com/app](https://gemini.google.com/app)`, `claude.ai/new?q=`) with native fallback handling. |
+| **Subscriptions & Paywall** | `purchases_flutter` | `^10.15.2` | RevenueCat v10 SDK supporting iOS App Store, Google Play Billing, and Web/Wasm entitlement synchronization. |
+
+### Reference `pubspec.yaml` Configuration
+
+```yaml
+name: promptvault_ai
+description: Production AI Image Prompt Library & Interactive Launcher
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.5
+  flutter: ">=3.47.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State Management & Architecture
+  flutter_riverpod: ^3.4.3
+  riverpod_annotation: ^3.0.0
+
+  # Navigation & Deep Linking
+  go_router: ^17.2.3
+
+  # Networking & Backend
+  dio: ^5.11.1
+  supabase_flutter: ^2.18.1
+
+  # Local Offline Database (SQLite 3 + Wasm Worker)
+  drift: ^2.22.0
+  drift_flutter: ^0.3.1
+  path_provider: ^2.1.5
+
+  # UI, Masonry Grid & Image Optimization
+  flutter_staggered_grid_view: ^0.7.0
+  cached_network_image: ^4.0.4
+  flutter_cache_manager: ^3.4.5
+  flutter_blurhash: ^0.9.1
+  share_plus: ^10.1.0
+
+  # External AI App Launching
+  url_launcher: ^6.3.3
+
+  # Monetization & Paywalls
+  purchases_flutter: ^10.15.2
+  purchases_ui_flutter: ^10.15.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.4.13
+  riverpod_generator: ^3.0.0
+  drift_dev: ^2.22.0
+  mocktail: ^1.0.5
+
+```
+
+---
+
+## 3. System Architecture: Feature-First Clean Architecture
+
+To keep the codebase modular, testable, and ready for AI-assisted code generation, the app uses a **Feature-First Clean Architecture** pattern powered by **Riverpod 3.x**.
+
+```text
+lib/
+├── main.dart
+├── core/
+│   ├── config/              # Env variables, CDN URLs, Supabase & RevenueCat keys
+│   ├── network/             # Dio 5.11.1 client, FusedTransformer, CancelToken manager
+│   ├── database/            # Drift SQLite local database & background isolate setup
+│   ├── router/              # GoRouter 17.2.3 configuration & route guards
+│   ├── theme/               # Dark-first OLED Material 3 design system & typography
+│   └── utils/               # Prompt variable regex parser, URL encoder, clipboard helper
+├── features/
+│   ├── feed/                # Trending Masonry Feed, Category filters, Search
+│   │   ├── data/            # Remote CDN JSON data source, Local Drift DAO, Repository impl
+│   │   ├── domain/          # PromptItem entity, VariableArg model, Repository interface
+│   │   └── presentation/    # Riverpod AsyncNotifiers, MasonryGridView, PromptCard widget
+│   ├── prompt_studio/       # Interactive Fill-in-the-Blank Editor & 1-Click AI Launcher
+│   │   ├── data/            # Deep-link launcher service (ChatGPT, Gemini, Claude)
+│   │   ├── domain/          # PromptCompilationService, AIPlatform enum
+│   │   └── presentation/    # VariableChipEditor, ModelComparisonSlider, LaunchBottomBar
+│   ├── reverse_prompt/      # Upload Image -> Generate Prompt via Gemini Flash API
+│   ├── collections/         # Saved Boards, Favorites (Supabase sync for Pro/Auth users)
+│   ├── auth/                # Passwordless Magic Link, Google & Apple Sign-In
+│   └── subscription/        # RevenueCat Paywall + Lemon Squeezy Web Checkout bridge
+
+```
+
+### Architectural Performance Rules
+
+1. **Zero Main-Isolate Blocking:** All static JSON catalog files exceeding 50 KB fetched from Cloudflare CDN are automatically parsed in a background isolate via Dio's `FusedTransformer`.
+2. **GPU Memory Capping on Masonry Grids:** Every `CachedNetworkImage` in the feed MUST set `memCacheWidth: 600` (scaled by device pixel ratio) so a 4K AI image never consumes more than ~400 KB of GPU texture RAM while scrolling.
+3. **Instant Perceived Loading:** Every prompt JSON object contains a 28-character `blurHash` string. While the WebP image loads from the CDN, `flutter_blurhash` renders an instant gradient placeholder in less than 1 millisecond.
+
+---
+
+## 4. Core Functional Modules & Detailed Specifications
+
+### Module 1: Discovery Feed & Instant Search (P0)
+
+* **User Story:** As a creator opening the app, I want to immediately browse trending AI images without creating an account so I can experience the app's value within 3 seconds.
+* **Functional Specs:**
+* **Masonry Staggered Grid:** Uses `MasonryGridView.count` (2 columns on mobile, 4 to 6 columns on tablet/web) respecting each image's native aspect ratio (`1:1`, `4:5`, `16:9`, `9:16`).
+* **Model Filter Pills:** Top horizontal filter bar for `All Models`, `ChatGPT (GPT-4o)`, `Google Gemini (Nano Banana)`, `Midjourney v6`, and `Flux`.
+* **Commercial Category Tabs:** `Product Ads`, `YouTube Thumbnails`, `UI/Web Design`, `Typography Posters`, `3D Icons`, `Brand Logos`, `Photorealistic Portraits`.
+* **Search-as-You-Type:** Queries the local Drift SQLite FTS5 (Full-Text Search) index first for 0ms latency, falling back to Dio with `CancelToken` to abort in-flight requests on every keystroke.
+
+
+
+### Module 2: Interactive "Fill-in-the-Blank" Prompt Studio (P0 — Core Differentiator)
+
+* **User Story:** As a marketer, I want to customize a prompt's subject, lighting, and brand colors using simple dropdowns and text chips rather than rewriting a 150-word prompt manually.
+* **Prompt Variable Syntax:**
+Raw prompt templates use bracketed variable tokens:
+`"Commercial studio shot of [Product: a matte black perfume bottle] resting on [Surface: wet volcanic rock], illuminated by [Lighting: warm golden hour rim lighting], 85mm f/1.4 lens, hyper-detailed."`
+* **UI Behavior:**
+* The Flutter parser converts each `[Key: DefaultValue]` token into an interactive, highlighted `ActionChip` inline within the prompt text.
+* Tapping a chip opens a sleek bottom sheet with preset suggestions (e.g., for `Lighting`: *Neon Cyberpunk*, *Softbox Studio*, *Cinematic Moody*, *Natural Sunlight*) plus a custom text field.
+* Modifying any variable updates the live compiled prompt string in real time via a Riverpod `Notifier`.
+
+
+
+### Module 3: 1-Click AI Deep-Linker ("Open in ChatGPT" & "Open in Gemini") (P0)
+
+* **User Story:** Once I customize my prompt, I want a single tap to open ChatGPT or Google Gemini with my prompt ready to generate.
+* **Technical Implementation Details:**
+
+```dart
+enum TargetAIPlatform { chatGpt, gemini, claude, perplexity }
+
+class AiLauncherService {
+  Future<void> launchWithPrompt({
+    required TargetAIPlatform platform,
+    required String compiledPrompt,
+    required VoidCallback onGeminiClipboardFallback,
+  }) async {
+    final encodedPrompt = Uri.encodeComponent(compiledPrompt);
+
+    switch (platform) {
+      case TargetAIPlatform.chatGpt:
+        // ChatGPT natively supports ?q= auto-fill on both Web and Mobile Universal Links
+        final uri = Uri.parse('https://chatgpt.com/?q=$encodedPrompt');
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+        break;
+
+      case TargetAIPlatform.claude:
+        final uri = Uri.parse('https://claude.ai/new?q=$encodedPrompt');
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+        break;
+
+      case TargetAIPlatform.perplexity:
+        final uri = Uri.parse('https://www.perplexity.ai/search?q=$encodedPrompt');
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+        break;
+
+      case TargetAIPlatform.gemini:
+        // Step 1: Copy compiled prompt to system clipboard immediately
+        await Clipboard.setData(ClipboardData(text: compiledPrompt));
+        // Step 2: Trigger non-blocking toast ("Prompt copied! Paste in Gemini ->")
+        onGeminiClipboardFallback();
+        // Step 3: Launch Gemini native app / web interface (with ?prompt= for users who have our Chrome Extension)
+        final uri = Uri.parse('https://gemini.google.com/app?prompt=$encodedPrompt');
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+        break;
+    }
+  }
+}
+
+```
+
+* **Platform Manifest Requirements (`url_launcher: ^6.3.3`):**
+* **Android (`AndroidManifest.xml`):** Must declare `<queries>` blocks for `https` intent schemes so `canLaunchUrl` and `launchUrl` work on Android 11+ (API 30+).
+* **iOS (`Info.plist`):** Configure `LSApplicationQueriesSchemes` for external app handoff.
+
+
+
+### Module 4: Multi-Model Output Comparison Slider (P1)
+
+* **User Story:** As a power user, I want to see how the exact same prompt renders in ChatGPT versus Google Gemini so I know which button to tap.
+* **Functional Specs:**
+* Prompts that have multiple model outputs display a **Model Switcher Tab** (`ChatGPT 4o` | `Gemini Nano Banana` | `Flux 2`) or an interactive **Split-Screen Before/After Slider** directly on the image detail hero card.
+
+
+
+### Module 5: "Reverse Prompt Engineer" (Image-to-Prompt) (P1 — Pro Monetization Hook)
+
+* **User Story:** As a user, I want to upload any reference image from my phone gallery and extract its exact lighting, camera angle, style, and a reusable prompt template.
+* **Functional Specs:**
+* Uses `image_picker` to select an image, compresses it client-side to 1024x1024 WebP, and calls a Supabase Edge Function backed by **Google Gemini Flash API**.
+* Returns a structured JSON breakdown: `Base Prompt`, `Editable Variables`, `Lighting Style`, `Camera/Lens Settings`, and `Recommended AI Model`.
+* **Quota:** Free users get **2 Reverse Prompts/day**; Pro users get **Unlimited**.
+
+
+
+### Module 6: Viral Growth Engine — Watermarked "Prompt Cards" (P1)
+
+* **User Story:** As a creator sharing AI art on X (Twitter), Threads, or Instagram Stories, I want to export a sleek "Recipe Card" showing the image alongside its prompt.
+* **Functional Specs:**
+* Uses Flutter's `RepaintBoundary` (`RenderRepaintBoundary.toImage()`) to capture a stylized card containing the output image, model badge, prompt text, and a subtle `"Get 1-Click Prompt on PromptVault.app"` watermark.
+* Shares directly via native OS share sheet (`share_plus`).
+
+
+
+---
+
+## 5. Zero-Cost ($0/Month for 50,000+ MAU) Hybrid Backend & Data Schema
+
+To ensure **50,000+ Monthly Active Users cost $0.00/month**, the backend strictly separates **Public Browsing Traffic (95% of load)** from **Authenticated User Mutations (5% of load)**.
+
+### A. Automated Free Data Farming Pipeline (GitHub Actions Cron)
+
+A scheduled GitHub Action runs every 12 hours (using GitHub's free 2,000 minutes/month runner) to fetch, sanitize, and enrich prompts at zero cost:
+
+1. **Sources Harvested:**
+* **Civitai Public REST API:** `GET [https://civitai.com/api/v1/images?limit=100&sort=Most%20Reactions&period=Week&nsfw=false&withMeta=true](https://civitai.com/api/v1/images?limit=100&sort=Most%20Reactions&period=Week&nsfw=false&withMeta=true)`
+* **GitHub Curated Repos (MIT / CC-BY-4.0):** Fetches structured JSON from `AIGC-Hackers/awesome-ai-image-prompts-claude` (ChatGPT & Gemini Nano Banana Pro prompts) and `PicoTrex/Awesome-Nano-Banana-images`.
+* **Lexica Public Search API:** `GET [https://lexica.art/api/v1/search?q=](https://lexica.art/api/v1/search?q=){category}`
+
+
+2. **AI Normalization (Google AI Studio Free Tier):**
+* Each harvested raw prompt is passed through **Gemini Flash (Free Tier)** to:
+* Reject any NSFW or low-effort prompts.
+* Generate a catchy US-market commercial title (e.g., *"Minimalist Luxury Skincare Studio Ad"*).
+* Convert hardcoded nouns into `[Variable: Default]` syntax.
+* Assign categories and tags.
+
+
+
+
+3. **Static Edge Deployment:**
+* The script outputs paginated JSON shards (`feed_page_1.json`, `category_ads.json`, `manifest.json`) and commits them to **Cloudflare Pages CDN** (Unlimited free bandwidth and requests).
+
+
+
+### B. Client-Side JSON Schema (`PromptItem`)
+
+```json
+{
+  "id": "pv_982341",
+  "title": "Isometric 3D Glassmorphism App Icon",
+  "raw_prompt": "A cute isometric 3D icon of [Object: a glowing rocket ship] inside a frosted glass squircle, [Color Palette: vibrant coral and deep indigo], soft studio global illumination, Octane render, 8k.",
+  "variables": [
+    {
+      "key": "Object",
+      "default_value": "a glowing rocket ship",
+      "suggestions": ["a golden retriever puppy", "a vintage camera", "a neon lightning bolt"]
+    },
+    {
+      "key": "Color Palette",
+      "default_value": "vibrant coral and deep indigo",
+      "suggestions": ["emerald green and matte gold", "pastel pink and mint", "cyberpunk neon purple"]
+    }
+  ],
+  "outputs": [
+    {
+      "model": "chatgpt_4o",
+      "image_url": "https://cdn.jsdelivr.net/gh/org/repo@main/images/pv_982341_gpt.webp",
+      "blur_hash": "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
+      "aspect_ratio": 1.0
+    },
+    {
+      "model": "gemini_nano_banana",
+      "image_url": "https://pub-xxx.r2.dev/pv_982341_gemini.webp",
+      "blur_hash": "L9Q9fSi_.AyE_3t7t7R**0o#DgR4",
+      "aspect_ratio": 1.0
+    }
+  ],
+  "category": "3d_icons",
+  "is_pro_only": false,
+  "likes_count": 1420,
+  "created_at": "2026-10-17T08:00:00Z"
+}
+
+```
+
+### C. Supabase PostgreSQL Schema (Only for Logged-In & Pro Users)
+
+Supabase (`supabase_flutter: ^2.18.1`) is ONLY invoked when a user signs in to bookmark a prompt, sync custom variable presets, or unlock Pro features—keeping usage well under Supabase's **50,000 MAU Free Tier**.
+
+```sql
+-- 1. User Profiles & Entitlement Status
+CREATE TABLE public.profiles (
+  id UUID REFERENCES auth.users(id) ON DELETE CASCADE PRIMARY KEY,
+  email TEXT,
+  is_pro BOOLEAN DEFAULT FALSE,
+  pro_expires_at TIMESTAMPTZ,
+  daily_reverse_prompts_used INT DEFAULT 0,
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 2. User Saved Collections / Boards
+CREATE TABLE public.collections (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
+  name TEXT NOT NULL,
+  is_private BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 3. Saved Prompts & Custom Variable Presets
+CREATE TABLE public.saved_prompts (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
+  collection_id UUID REFERENCES public.collections(id) ON DELETE CASCADE,
+  prompt_id TEXT NOT NULL, -- References ID in Cloudflare Static JSON
+  custom_variables JSONB DEFAULT '{}'::jsonb,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(user_id, prompt_id)
+);
+
+-- Enable Row Level Security (RLS)
+ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.collections ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.saved_prompts ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can read/write own bookmarks" ON public.saved_prompts
+  FOR ALL USING (auth.uid() = user_id);
+
+```
+
+---
+
+## 6. Monetization & Cross-Border Payment Architecture (US Audience to Pakistan)
+
+### Freemium vs. Pro Value Matrix
+
+| Feature | Free Tier ($0) | PromptVault PRO ($8.99/mo or $49.99/yr) |
+| --- | --- | --- |
+| **Browse Trending Feed & Categories** | Unlimited | Unlimited |
+| **1-Click Open in ChatGPT & Gemini** | Standard Prompts | All Prompts + Commercial "PRO" Packs |
+| **Interactive Variable Customizer** | 3 Customizations / Day | Unlimited Customizations + Save Custom Presets |
+| **Commercial Ad & Brand Packs** | Locked (Preview Only) | Full Access (E-Commerce, Thumbnails, UI Kits) |
+| **Reverse Prompt Engineer (Image to Prompt)** | 2 Scans / Day | Unlimited High-Precision Scans |
+| **Saved Collections / Boards** | Up to 10 Bookmarks | Unlimited Private Collections & Offline Sync |
+
+### Payment & Payout Stack (Pakistan-Compatible)
+
+1. **iOS & Android In-App Purchases:** Integrated via **RevenueCat (`purchases_flutter: ^10.15.2`)** connected to Apple App Store Connect and Google Play Console. Both Apple and Google support direct USD wire payouts to Pakistani bank accounts (HBL, Meezan, Standard Chartered, etc.).
+2. **Flutter Web & External Checkout:** Integrated via **Lemon Squeezy** or **Polar.sh** (Merchant of Record). They handle all US state-by-state sales tax compliance automatically and pay out to Pakistan via **Payoneer** or direct USD bank transfer. A webhook updates `public.profiles.is_pro = true` in Supabase and syncs with RevenueCat.
+
+---
+
+## 7. Non-Functional Requirements & Quality Gates
+
+* **Cold Start Time:** Less than 1.2 seconds to interactive Masonry feed on mid-range Android and iOS devices (served immediately from local `drift_flutter` cache while background sync checks `manifest.json` on Cloudflare CDN).
+* **Frame Budget:** 99th percentile frame rasterization time under 8.3ms (120Hz ProMotion / LTPO displays) using Flutter 3.47 Impeller.
+* **App Binary Size:** Less than 18 MB download size on Android (AAB) and less than 28 MB on iOS.
+* **Web Wasm Bundle:** Compiled via `flutter build web --wasm` and hosted on Cloudflare Pages with Brotli compression enabled.
+
+---
+
+## 8. Interactive System Architecture & Data Flow Blueprint
+
+Use the interactive architecture visualizer below to step through how your **Flutter 3.47 Clean Architecture layers**, **$0 Cloudflare CDN pipeline**, **Supabase Auth**, and **1-Click AI Deep-Link Launcher** interact at runtime:
+
+---

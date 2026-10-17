@@ -1,0 +1,35 @@
+name: App quality
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  flutter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Install pinned Flutter
+        run: |
+          git clone --depth 1 --branch 3.47.7 https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
+          echo "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+      - run: node tools/bootstrap_assets.mjs
+      - run: flutter pub get
+      - run: flutter analyze --fatal-infos
+      - run: flutter test
+      - run: node tools/client_config.mjs
+      - run: node tools/config_test.mjs
+      - run: node --test tools/catalogHealth.test.mjs
+      - run: flutter build web --wasm --dart-define-from-file=config/client.json
+  bend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Install Bend
+        run: curl -fsSL https://bend-lang.com/install.sh -o /tmp/install-bend.sh && bash /tmp/install-bend.sh
+      - name: Check catalog policy laws
+        run: |
+          export PATH="$HOME/.local/bin:$HOME/.bend/bin:$PATH"
+          bend PROOF.bend
+          bend catalog_policy.bend -o tools/catalog_policy.mjs
+          node tools/ingest_catalog.mjs

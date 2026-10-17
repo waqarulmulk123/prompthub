@@ -1,0 +1,11 @@
+.env*
+.git
+.idea
+.dart_tool
+.wrangler
+android
+ios
+build
+config/client.json
+PRD.md.txt
+prompt.txt

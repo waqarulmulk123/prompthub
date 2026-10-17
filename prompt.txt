@@ -1,0 +1,94 @@
+To build this complete, production-grade Flutter app module by module in Cursor or Gemini without running into syntax errors or architectural mismatch, you need a precise, sequential prompt chain. Each prompt in this sequence builds directly on top of the previous one, maintaining strict adherence to Flutter 3.47, Riverpod 3.x, GoRouter, and Clean Architecture.
+Here is your Master Prompt Sequence ready to copy and paste module by module:
+Phase 1: Project Initialization, Architecture & Theme Setup
+Copy and paste this into Cursor or Gemini first to scaffold the entire project structure.
+
+
+
+Plaintext
+Act as a Senior Flutter Architect (Flutter 3.47.7, Dart 3.13.5). I am building "PromptVault AI", a cross-platform mobile and web SaaS application for AI image prompts.
+
+Please generate the complete foundational structure for this project using a Feature-First Clean Architecture and Riverpod 3.4.3. 
+
+1. Provide the exact pubspec.yaml file containing dependencies: flutter_riverpod (^3.4.3), riverpod_annotation (^3.0.0), go_router (^17.2.3), dio (^5.11.1), drift (^2.22.0), drift_flutter (^0.3.1), supabase_flutter (^2.18.1), flutter_staggered_grid_view (^0.7.0), cached_network_image (^4.0.4), flutter_blurhash (^0.9.1), url_launcher (^6.3.3), and purchases_flutter (^10.15.2).
+2. Set up the core directory structure under lib/ (core/config, core/router, core/network, core/database, core/theme, and features/feed).
+3. Create a dark-first OLED Material 3 AppTheme in core/theme/app_theme.dart with deep blacks (#090A0F), vibrant electric indigo (#6366F1) primary accents, and smooth typography using GoogleFonts.
+4. Set up GoRouter (go_router ^17.2.3) in core/router/app_router.dart with declarative routes for a ShellRoute (bottom navigation bar holding Feed, Bookmarks, and Profile screens).
+5. Provide the main.dart entry point initializing Riverpod ProviderScope and Supabase client.
+
+
+Phase 2: Local SQLite Database (Drift) & Caching Layer
+Paste this second to configure offline storage and background isolate JSON parsing.
+
+
+
+Plaintext
+Continuing with the PromptVault AI Flutter project using Riverpod 3.4.3 and Drift 2.22.0:
+
+Please implement the local persistence and networking layer in the core directory:
+1. Create a Drift SQLite database in core/database/app_database.dart using drift_flutter with `shareAcrossIsolates: true` to handle local caching of prompts and user bookmarks. Define a `CachedPromptsTable` storing prompt ID, title, raw prompt string, category, JSON variables, output image URLs, and blurhash.
+2. Configure Dio 5.11.1 client in core/network/dio_client.dart with a FusedTransformer to automatically offload JSON payloads larger than 50 KB to a background isolate, preventing UI jank on low-end devices.
+3. Create a remote data source service in features/feed/data/datasources/prompt_remote_datasource.dart that fetches the static JSON shards from Cloudflare CDN (or local mock fallback).
+4. Create a local repository implementation that syncs Cloudflare CDN JSON data into the Drift SQLite database for instant offline-first feed loading.
+
+
+Phase 3: Discovery Feed & Masonry Staggered Grid
+Paste this third to build the main home screen UI with high-performance image rendering.
+
+
+
+Plaintext
+Continuing the PromptVault AI Flutter app development:
+
+Please implement the Feed Feature (features/feed/) adhering to Riverpod 3.4.3 AsyncNotifier architecture and Flutter 3.47 performance guidelines:
+1. Create the `PromptItem` domain entity and JSON serialization model supporting multiple output models (ChatGPT 4o, Google Gemini Nano Banana, Flux) with aspect ratios, image URLs, and blurhash strings.
+2. Create a Riverpod AsyncNotifier provider (`feedNotifierProvider`) that fetches trending prompts from the repository with pagination and search query filtering.
+3. Build the Feed Presentation screen (`features/feed/presentation/screens/feed_screen.dart`):
+   - Include a top horizontal category filter bar ("All", "Product Ads", "YouTube Thumbnails", "3D Icons", "Portraits").
+   - Include a search bar with 300ms debounce using Dio CancelToken.
+   - Use `MasonryGridView.count` (flutter_staggered_grid_view ^0.7.0) to display uncropped 1:1, 16:9, and 9:16 cards.
+   - For every card, use `CachedNetworkImage` with `flutter_blurhash` as a placeholder and set `memCacheWidth: 600` to prevent GPU memory spikes on mobile devices.
+
+
+Phase 4: Interactive "Fill-in-the-Blank" Prompt Studio & 1-Click AI Launcher
+Paste this fourth to build the core viral feature and 1-click launcher.
+
+
+
+Plaintext
+Continuing the PromptVault AI Flutter app development:
+
+Please implement the Prompt Studio Feature (features/prompt_studio/) where users customize prompts and launch them directly into AI apps:
+1. Create a prompt variable parser utility in core/utils/prompt_parser.dart that uses Regex to parse bracketed tokens of the format `[Key: DefaultValue]` (e.g., `[Subject: luxury perfume bottle]`) from raw prompt strings into interactive variable chips.
+2. Build the Prompt Studio screen (`features/prompt_studio/presentation/screens/prompt_studio_screen.dart`):
+   - Display the compiled prompt string live at the top in a sleek card with a "Copy to Clipboard" button.
+   - Render each variable as an interactive `ActionChip`. Tapping a chip opens a bottom sheet with preset suggestions and a custom text input field.
+   - Updating any variable dynamically re-compiles the final prompt string in real time via a Riverpod Notifier.
+3. Build the 1-Click AI Launcher service (`features/prompt_studio/data/ai_launcher_service.dart`) using `url_launcher ^6.3.3`:
+   - **ChatGPT button:** Opens `https://chatgpt.com/?q={encodedPrompt}` which natively auto-fills the input box on web and mobile.
+   - **Claude button:** Opens `https://claude.ai/new?q={encodedPrompt}`.
+   - **Gemini button:** Copies the compiled prompt to the clipboard, shows a non-blocking snackbar ("Prompt copied! Paste in Gemini"), and launches `https://gemini.google.com/app`.
+4. Build a bottom action bar with these launcher buttons and a "Save to Collection" button.
+
+
+Phase 5: Authentication, Bookmarks & RevenueCat Paywall Integration
+Paste this fifth to add user accounts, cloud sync, and monetization.
+
+
+
+Plaintext
+Continuing the PromptVault AI Flutter app development:
+
+Please implement the Authentication, Bookmarks, and Subscription features:
+1. Set up Supabase Auth service (`features/auth/`) supporting Email Magic Link, Google Sign-In, and Apple Sign-In.
+2. Create the Saved Collections / Bookmarks feature (`features/collections/`) where authenticated users can save prompts to custom private boards. Sync these saved bookmarks with Supabase PostgreSQL `saved_prompts` and `collections` tables with Row Level Security (RLS).
+3. Integrate RevenueCat (`purchases_flutter ^10.15.2`) in `features/subscription/` to manage Pro subscriptions ($8.99/mo or $49.99/yr).
+4. Create a paywall modal widget (`ProPaywallScreen`) that triggers whenever a free user attempts to access Pro-only commercial prompt packs or unlimited variable saves. Check user entitlement via Riverpod before allowing access.
+5. Provide the complete Android `AndroidManifest.xml` intent queries and iOS `Info.plist` URL scheme configurations required for `url_launcher` and OAuth sign-in.
+
+
+How to use this sequence:
+Open your AI coding assistant (Cursor chat or Gemini Code Assist).
+Paste Phase 1 and let it generate the files. Verify there are no errors.
+Paste Phase 2, and so on through Phase 5.
+Because each prompt explicitly references the previous architecture and exact package versions from the PRD, the code generated across modules will fit together seamlessly without breaking imports.

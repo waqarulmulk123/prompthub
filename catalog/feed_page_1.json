@@ -1,0 +1,1403 @@
+{
+  "prompts": [
+    {
+      "id": "pv_001",
+      "title": "The quiet luxury campaign",
+      "category": "product_ads",
+      "raw_prompt": "Commercial studio photograph of [Product: a silver wristwatch] on [Surface: warm travertine], [Lighting: soft directional daylight], elegant negative space, 85mm lens, subtle film grain.",
+      "variables": [
+        {
+          "key": "Product",
+          "default_value": "a silver wristwatch",
+          "suggestions": []
+        },
+        {
+          "key": "Surface",
+          "default_value": "warm travertine",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "soft directional daylight",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "model": "chatgpt_4o",
+          "image_url": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "product_ads",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_002",
+      "title": "A world in a glass bottle",
+      "category": "product_ads",
+      "raw_prompt": "Premium campaign for [Product: a sculptural perfume bottle], surrounded by [Details: delicate botanical shadows], [Palette: amber and warm cream], macro detail, cinematic studio light.",
+      "variables": [
+        {
+          "key": "Product",
+          "default_value": "a sculptural perfume bottle",
+          "suggestions": []
+        },
+        {
+          "key": "Details",
+          "default_value": "delicate botanical shadows",
+          "suggestions": []
+        },
+        {
+          "key": "Palette",
+          "default_value": "amber and warm cream",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "gemini_nano_banana",
+          "image_url": "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "product_ads",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_003",
+      "title": "Beyond the ordinary",
+      "category": "portraits",
+      "raw_prompt": "Editorial portrait of [Subject: a creative director], [Lighting: soft window light], [Backdrop: a charcoal studio], authentic skin texture, 85mm portrait lens, restrained magazine composition.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a creative director",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "soft window light",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a charcoal studio",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "flux",
+          "image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.75
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "portraits",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_004",
+      "title": "A little escape",
+      "category": "thumbnails",
+      "raw_prompt": "Cinematic YouTube thumbnail showing [Scene: dramatic alpine peaks] under [Weather: early morning mist], bold foreground silhouette, [Mood: breathtaking scale], clean space for a short headline.",
+      "variables": [
+        {
+          "key": "Scene",
+          "default_value": "dramatic alpine peaks",
+          "suggestions": []
+        },
+        {
+          "key": "Weather",
+          "default_value": "early morning mist",
+          "suggestions": []
+        },
+        {
+          "key": "Mood",
+          "default_value": "breathtaking scale",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "midjourney",
+          "image_url": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 1.5
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "thumbnails",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_005",
+      "title": "Fresh by design",
+      "category": "product_ads",
+      "raw_prompt": "Minimal product ad for [Product: a botanical skincare serum], [Surface: pale limestone], [Accents: fresh green leaves], diffused daylight, tactile packaging, premium editorial finish.",
+      "variables": [
+        {
+          "key": "Product",
+          "default_value": "a botanical skincare serum",
+          "suggestions": []
+        },
+        {
+          "key": "Surface",
+          "default_value": "pale limestone",
+          "suggestions": []
+        },
+        {
+          "key": "Accents",
+          "default_value": "fresh green leaves",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "chatgpt_4o",
+          "image_url": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "product_ads",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_006",
+      "title": "Rooms that breathe",
+      "category": "ui_design",
+      "raw_prompt": "Design a responsive website hero for [Brand: a contemporary interiors studio], with [Palette: warm neutrals], generous editorial typography, a full-width architectural photograph and clear accessible navigation.",
+      "variables": [
+        {
+          "key": "Brand",
+          "default_value": "a contemporary interiors studio",
+          "suggestions": []
+        },
+        {
+          "key": "Palette",
+          "default_value": "warm neutrals",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "gemini_nano_banana",
+          "image_url": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 1.5
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "ui_design",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_007",
+      "title": "Golden hour, bottled",
+      "category": "product_ads",
+      "raw_prompt": "Luxury editorial still life featuring [Product: a golden fragrance bottle], [Lighting: a sharp late-afternoon sunbeam], [Surface: honey-colored stone], long geometric shadows, rich material detail.",
+      "variables": [
+        {
+          "key": "Product",
+          "default_value": "a golden fragrance bottle",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "a sharp late-afternoon sunbeam",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Surface",
+          "default_value": "honey-colored stone",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "flux",
+          "image_url": "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.75
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "product_ads",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_008",
+      "title": "The weekend collection",
+      "category": "fashion",
+      "raw_prompt": "Create a visual identity concept for [Brand: WEEKEND CLUB], a [Industry: independent fashion label], [Style: understated typographic wordmark], [Palette: ink black and ivory], flat vector, no mockup.",
+      "variables": [
+        {
+          "key": "Brand",
+          "default_value": "WEEKEND CLUB",
+          "suggestions": []
+        },
+        {
+          "key": "Industry",
+          "default_value": "independent fashion label",
+          "suggestions": []
+        },
+        {
+          "key": "Style",
+          "default_value": "understated typographic wordmark",
+          "suggestions": []
+        },
+        {
+          "key": "Palette",
+          "default_value": "ink black and ivory",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "midjourney",
+          "image_url": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "fashion",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_009",
+      "title": "Built for the spotlight",
+      "category": "3d_icons",
+      "raw_prompt": "Isometric 3D icon of [Object: a miniature architectural tower], [Material: frosted glass and brushed aluminum], [Palette: electric indigo and silver], soft ambient occlusion, transparent background.",
+      "variables": [
+        {
+          "key": "Object",
+          "default_value": "a miniature architectural tower",
+          "suggestions": []
+        },
+        {
+          "key": "Material",
+          "default_value": "frosted glass and brushed aluminum",
+          "suggestions": []
+        },
+        {
+          "key": "Palette",
+          "default_value": "electric indigo and silver",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "chatgpt_4o",
+          "image_url": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "3d_icons",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_010",
+      "title": "Something worth saying",
+      "category": "typography",
+      "raw_prompt": "Editorial typography poster reading [Headline: MAKE ROOM FOR IDEAS], [Style: expressive condensed lettering], [Palette: cobalt blue and off-white], dramatic hierarchy, precise letterforms, print-ready composition.",
+      "variables": [
+        {
+          "key": "Headline",
+          "default_value": "MAKE ROOM FOR IDEAS",
+          "suggestions": []
+        },
+        {
+          "key": "Style",
+          "default_value": "expressive condensed lettering",
+          "suggestions": []
+        },
+        {
+          "key": "Palette",
+          "default_value": "cobalt blue and off-white",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "gemini_nano_banana",
+          "image_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "typography",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_011",
+      "title": "Still life in motion",
+      "category": "product_ads",
+      "raw_prompt": "Photorealistic campaign of [Product: a sculptural lounge chair], [Setting: a sunlit modern gallery], [Material: natural oak and linen], architectural shadows, wide composition, interior design magazine quality.",
+      "variables": [
+        {
+          "key": "Product",
+          "default_value": "a sculptural lounge chair",
+          "suggestions": []
+        },
+        {
+          "key": "Setting",
+          "default_value": "a sunlit modern gallery",
+          "suggestions": []
+        },
+        {
+          "key": "Material",
+          "default_value": "natural oak and linen",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "flux",
+          "image_url": "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 1
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "product_ads",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_012",
+      "title": "A softer kind of future",
+      "category": "ui_design",
+      "raw_prompt": "Design a polished workspace dashboard for [Audience: independent creatives], [Palette: charcoal and lavender], calm information hierarchy, accessible contrast, realistic project cards and generous white space.",
+      "variables": [
+        {
+          "key": "Audience",
+          "default_value": "independent creatives",
+          "suggestions": []
+        },
+        {
+          "key": "Palette",
+          "default_value": "charcoal and lavender",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "midjourney",
+          "image_url": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 1.5
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "ui_design",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_013",
+      "title": "Streetwear after dark",
+      "category": "fashion",
+      "raw_prompt": "Fashion editorial photograph of [Subject: a layered streetwear outfit], [Lighting: neon city reflections], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a layered streetwear outfit",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "neon city reflections",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "chatgpt_4o",
+          "image_url": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "fashion",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_014",
+      "title": "The tailored edit",
+      "category": "men",
+      "raw_prompt": "Fashion editorial photograph of [Subject: a tailored linen suit], [Lighting: warm studio daylight], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a tailored linen suit",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "warm studio daylight",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "gemini_nano_banana",
+          "image_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "men",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_015",
+      "title": "Modern muse",
+      "category": "women",
+      "raw_prompt": "Fashion editorial photograph of [Subject: a minimalist evening outfit], [Lighting: soft window light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a minimalist evening outfit",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "soft window light",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "flux",
+          "image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "women",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_016",
+      "title": "Monochrome essentials",
+      "category": "fashion",
+      "raw_prompt": "Fashion editorial photograph of [Subject: a monochrome capsule wardrobe], [Lighting: diffused studio light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a monochrome capsule wardrobe",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "diffused studio light",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "midjourney",
+          "image_url": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "fashion",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_017",
+      "title": "Weekend menswear",
+      "category": "men",
+      "raw_prompt": "Fashion editorial photograph of [Subject: relaxed weekend menswear], [Lighting: overcast natural light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "relaxed weekend menswear",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "overcast natural light",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "chatgpt_4o",
+          "image_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "men",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_018",
+      "title": "The silk story",
+      "category": "women",
+      "raw_prompt": "Fashion editorial photograph of [Subject: a flowing silk dress], [Lighting: golden hour backlight], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a flowing silk dress",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "golden hour backlight",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "gemini_nano_banana",
+          "image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "women",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_019",
+      "title": "Sneaker campaign",
+      "category": "fashion",
+      "raw_prompt": "Fashion editorial photograph of [Subject: a limited edition sneaker], [Lighting: dramatic rim lighting], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a limited edition sneaker",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "dramatic rim lighting",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "flux",
+          "image_url": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "fashion",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_020",
+      "title": "Creative headshot",
+      "category": "men",
+      "raw_prompt": "Fashion editorial photograph of [Subject: a creative professional], [Lighting: large softbox lighting], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a creative professional",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "large softbox lighting",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "midjourney",
+          "image_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "men",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_021",
+      "title": "Beauty in detail",
+      "category": "women",
+      "raw_prompt": "Fashion editorial photograph of [Subject: a beauty editorial portrait], [Lighting: soft beauty lighting], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a beauty editorial portrait",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "soft beauty lighting",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "chatgpt_4o",
+          "image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "women",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_022",
+      "title": "Denim in the city",
+      "category": "fashion",
+      "raw_prompt": "Fashion editorial photograph of [Subject: a contemporary denim outfit], [Lighting: urban afternoon light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a contemporary denim outfit",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "urban afternoon light",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "gemini_nano_banana",
+          "image_url": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "fashion",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_023",
+      "title": "The classic profile",
+      "category": "men",
+      "raw_prompt": "Fashion editorial photograph of [Subject: a classic menswear portrait], [Lighting: split studio lighting], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a classic menswear portrait",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "split studio lighting",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "flux",
+          "image_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "men",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_024",
+      "title": "Natural confidence",
+      "category": "women",
+      "raw_prompt": "Fashion editorial photograph of [Subject: a natural lifestyle portrait], [Lighting: open shade daylight], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a natural lifestyle portrait",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "open shade daylight",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "midjourney",
+          "image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "women",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_025",
+      "title": "Texture and tailoring",
+      "category": "fashion",
+      "raw_prompt": "Fashion editorial photograph of [Subject: a textured wool coat], [Lighting: directional winter light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a textured wool coat",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "directional winter light",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "chatgpt_4o",
+          "image_url": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "fashion",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_026",
+      "title": "Athletic editorial",
+      "category": "men",
+      "raw_prompt": "Fashion editorial photograph of [Subject: a premium athletic outfit], [Lighting: high contrast stadium light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a premium athletic outfit",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "high contrast stadium light",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "gemini_nano_banana",
+          "image_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "men",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_027",
+      "title": "Summer color study",
+      "category": "women",
+      "raw_prompt": "Fashion editorial photograph of [Subject: a vibrant summer outfit], [Lighting: bright diffused sunlight], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a vibrant summer outfit",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "bright diffused sunlight",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "flux",
+          "image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "women",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_028",
+      "title": "Accessories in focus",
+      "category": "fashion",
+      "raw_prompt": "Fashion editorial photograph of [Subject: a refined accessories collection], [Lighting: controlled studio highlights], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a refined accessories collection",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "controlled studio highlights",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "midjourney",
+          "image_url": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "fashion",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_029",
+      "title": "Contemporary gentleman",
+      "category": "men",
+      "raw_prompt": "Fashion editorial photograph of [Subject: a contemporary formal outfit], [Lighting: cinematic window light], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a contemporary formal outfit",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "cinematic window light",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "chatgpt_4o",
+          "image_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "men",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    },
+    {
+      "id": "pv_030",
+      "title": "The editorial cover",
+      "category": "women",
+      "raw_prompt": "Fashion editorial photograph of [Subject: a fashion magazine cover portrait], [Lighting: dramatic beauty lighting], [Backdrop: a clean architectural setting], realistic textures, thoughtful styling, magazine composition, no logos or text.",
+      "variables": [
+        {
+          "key": "Subject",
+          "default_value": "a fashion magazine cover portrait",
+          "suggestions": []
+        },
+        {
+          "key": "Lighting",
+          "default_value": "dramatic beauty lighting",
+          "suggestions": [
+            "Softbox studio",
+            "Neon reflections",
+            "Natural sunlight"
+          ]
+        },
+        {
+          "key": "Backdrop",
+          "default_value": "a clean architectural setting",
+          "suggestions": []
+        }
+      ],
+      "outputs": [
+        {
+          "model": "gemini_nano_banana",
+          "image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80",
+          "blur_hash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+          "aspect_ratio": 0.8
+        }
+      ],
+      "is_pro_only": false,
+      "likes_count": 0,
+      "tags": [
+        "women",
+        "editorial",
+        "starter"
+      ],
+      "attribution": "Illustrative reference photo via Unsplash. Original PromptVault template; not a verified AI output.",
+      "source_url": "https://unsplash.com",
+      "license": "Unsplash License (photo); CC0-1.0 (template)",
+      "safety_reviewed": true,
+      "verified": false,
+      "created_at": "2026-10-17T00:00:00Z"
+    }
+  ]
+}
