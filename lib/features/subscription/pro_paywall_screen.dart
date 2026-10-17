@@ -36,8 +36,9 @@ class _ProPaywallState extends ConsumerState<ProPaywallScreen> {
           if (await ref.refresh(entitlementProvider.future)) {
             break;
           }
-          if (attempt < 4)
+          if (attempt < 4) {
             await Future<void>.delayed(const Duration(seconds: 2));
+          }
         }
       }
       if (!mounted) return;
