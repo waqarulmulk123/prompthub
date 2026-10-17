@@ -438,3 +438,5 @@ verify_jwt = true
 verify_jwt = false
 [functions.catalog-content]
 verify_jwt = false
+[functions.admin-enroll]
+verify_jwt = false

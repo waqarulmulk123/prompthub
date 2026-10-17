@@ -6,6 +6,8 @@ await import('../supabase/functions/admin-console/index.ts');
 const admin=handler;
 await import('../supabase/functions/catalog-content/index.ts');
 const catalog=handler;
+await import('../supabase/functions/admin-enroll/index.ts');
+const enroll=handler;
 const originalFetch=globalThis.fetch;
 const request=(body,auth=true)=>new Request('https://test.invalid',{method:'POST',headers:{'Content-Type':'application/json',...(auth?{Authorization:'Bearer test'}:{})},body:JSON.stringify(body)});
 test('admin API requires a live approved account and MFA; editable metadata grants nothing',async()=>{
@@ -44,5 +46,32 @@ test('public catalog signs only media selected by the trusted publication RPC',a
   const response=await catalog(new Request('https://test.invalid'));const data=await response.json();
   assert.equal(response.status,200);assert.equal(data.prompts[0].image_path,undefined);
   assert.ok(data.prompts[0].outputs[0].image_url.startsWith('https://test.supabase.co/storage/v1/object/sign/catalog-media/'));
+ }finally{globalThis.fetch=originalFetch;}
+});
+test('registration requires a single-use invitation and uses its bound email',async()=>{
+ let claimed=false,created=0;
+ try{
+  globalThis.fetch=async(url,opts={})=>{
+   if(url.endsWith('/rpc/claim_admin_invite')){if(claimed)return Response.json(null);claimed=true;return Response.json({email:'approved@example.invalid'});}
+   if(url.endsWith('/admin/users')){const body=JSON.parse(opts.body);assert.equal(body.email,'approved@example.invalid');assert.equal(body.email_confirm,true);created++;return Response.json({id:'new-test-user'});}
+   throw Error('Unexpected enrollment request');
+  };
+  assert.equal((await enroll(request({token:'invalid',password:'a-long-test-password'},false))).status,400);
+  const body={token:'a'.repeat(64),password:'a-long-test-password',email:'attacker@example.invalid'};
+  assert.equal((await enroll(request(body,false))).status,200);
+  assert.equal((await enroll(request(body,false))).status,403);
+  assert.equal(created,1);
+ }finally{globalThis.fetch=originalFetch;}
+});
+test('failed enrollment releases only an invitation whose account was not created',async()=>{
+ let released=false;
+ try{
+  globalThis.fetch=async url=>{
+   if(url.endsWith('/rpc/claim_admin_invite'))return Response.json({email:'approved@example.invalid'});
+   if(url.endsWith('/rpc/release_admin_invite')){released=true;return Response.json(null);}
+   return new Response('unavailable',{status:503});
+  };
+  assert.equal((await enroll(request({token:'b'.repeat(64),password:'a-long-test-password'},false))).status,409);
+  assert.equal(released,true);
  }finally{globalThis.fetch=originalFetch;}
 });
