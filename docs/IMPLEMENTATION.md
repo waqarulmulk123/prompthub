@@ -12,7 +12,7 @@ The PRD, phase instructions and six-screen attachment were read in full. The app
 
 ## Service status
 
-Supabase schema, private row policies, quota/entitlement RPCs and four Edge Functions are deployed. Database security checks and an authenticated Gemini reverse-image request passed. Cloudflare catalog and app projects and a Vercel project are provisioned. See SERVICES.md for deployment details.
+Supabase schema, private row policies, quota/entitlement RPCs and seven Edge Functions are deployed. Database security checks and an authenticated Gemini reverse-image request passed. Cloudflare catalog and app projects and a Vercel project are provisioned. See SERVICES.md for deployment details.
 
 RevenueCat products, Apple/Google OAuth credentials, Lemon Squeezy merchant products and production email delivery still require owner configuration. Their controls remain unavailable or return a clear service-unavailable response until configured. The user explicitly requested completion of the app and available services without waiting for those accounts.
 

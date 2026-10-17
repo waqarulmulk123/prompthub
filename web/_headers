@@ -6,3 +6,6 @@
 
 /*.wasm
   Content-Type: application/wasm
+
+/*.mjs
+  Content-Type: application/javascript
