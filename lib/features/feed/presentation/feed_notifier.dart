@@ -68,12 +68,45 @@ class FeedNotifier extends AsyncNotifier<FeedState> {
     }
   }
 
-  Future<void> refresh() async {
+  Future<void> refresh({bool preservePages = false}) async {
     _cancel?.cancel();
     final token = _cancel = CancelToken();
     try {
       await ref.read(repositoryProvider).sync(cancelToken: token);
-      if (ref.mounted && !token.isCancelled) await filter();
+      if (!ref.mounted || token.isCancelled) return;
+      if (!preservePages) {
+        await filter();
+        return;
+      }
+      final value = state.asData?.value ?? const FeedState(items: []);
+      final generation = ++_generation;
+      final wanted =
+          value.items.length + (value.loadingMore ? discoveryPageSize : 0);
+      final items = <PromptItem>[];
+      var more = true;
+      do {
+        final page = await ref
+            .read(repositoryProvider)
+            .search(
+              query: value.query,
+              category: value.category,
+              model: value.model,
+              offset: items.length,
+            );
+        items.addAll(page);
+        more = page.length == discoveryPageSize;
+      } while (items.length < wanted && more);
+      if (ref.mounted && !token.isCancelled && generation == _generation) {
+        state = AsyncData(
+          FeedState(
+            items: items,
+            query: value.query,
+            category: value.category,
+            model: value.model,
+            hasMore: more,
+          ),
+        );
+      }
     } catch (_) {
       if (!ref.mounted || token.isCancelled) return;
       final value = state.asData?.value;

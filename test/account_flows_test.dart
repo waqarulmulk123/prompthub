@@ -12,6 +12,7 @@ import 'package:prompthub/features/collections/collections_screen.dart';
 import 'package:prompthub/features/feed/data/prompt_repository.dart';
 import 'package:prompthub/features/subscription/pro_paywall_screen.dart';
 import 'package:prompthub/features/subscription/subscription_service.dart';
+import 'package:prompthub/features/notifications/push_native.dart';
 
 class ReadyStore extends SubscriptionService {
   @override
@@ -31,6 +32,10 @@ final account = User(
 );
 
 void main() {
+  test('unconfigured native push never starts the SDK', () async {
+    expect(PushService.available, isFalse);
+    await PushService.initialize();
+  });
   testWidgets('restore waits for trusted entitlement verification', (
     tester,
   ) async {

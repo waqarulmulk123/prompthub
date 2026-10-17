@@ -1,0 +1,2 @@
+update private.drop_pool set prompt=prompt||'{"attribution":"Original PromptVault daily text template. No generated image is supplied.","source_url":"https://promptvault-ai.pages.dev","license":"CC0-1.0"}'::jsonb;
+update private.drop_days set prompts=(select jsonb_agg(p||'{"attribution":"Original PromptVault daily text template. No generated image is supplied.","source_url":"https://promptvault-ai.pages.dev","license":"CC0-1.0"}'::jsonb order by n) from jsonb_array_elements(prompts) with ordinality a(p,n));

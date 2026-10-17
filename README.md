@@ -50,3 +50,5 @@ App Store / Play Store products, RevenueCat offerings, merchant checkout product
 ## Daily creator features
 
 The home drop unlocks three original templates at 9am New York time. Claim a daily bundle to keep it permanently; seven consecutive claims earn three additional image scans. The account vault separates permanent claims from the Pro archive. Pro members can save a private Brand DNA profile and apply it from the studio. Quick Inspire offers swipe actions and buttons, while Prompt Booster turns a short idea into a detailed Gemini prompt. Community remixes are private until manually reviewed, with report/block controls and verified voting. See docs/SERVICES.md for moderation and notification setup.
+
+Administrator publishing and private image storage are documented in [docs/ADMIN.md](docs/ADMIN.md). Run `node tools/bootstrap_admin.mjs` before publishing the separate `admin/` portal. Android release evidence and remaining vendor launch gates are in [docs/ANDROID_RELEASE.md](docs/ANDROID_RELEASE.md) and [docs/AUDIT.md](docs/AUDIT.md).

@@ -1,5 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
+import {boundedImage} from '../supabase/functions/_shared/image.ts';
 
 let handler;
 const userId='11111111-1111-4111-8111-111111111111';
@@ -9,6 +10,13 @@ await import('../supabase/functions/community-remixes/index.ts');const community
 await import('../supabase/functions/reverse-prompt/index.ts');const reverse=handler;
 const request=body=>new Request('https://test.invalid',{method:'POST',headers:{Authorization:'Bearer test','Content-Type':'application/json'},body:JSON.stringify(body)});
 const originalFetch=globalThis.fetch;
+test('server rejects compressed image bombs and malformed dimensions',()=>{
+  const pixel=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8DwHwAFgAI/ScLbtAAAAABJRU5ErkJggg==','base64');
+  assert.equal(boundedImage(pixel),true);
+  const bomb=Buffer.from(pixel);bomb.writeUInt32BE(100000,16);
+  assert.equal(boundedImage(bomb),false);
+  assert.equal(boundedImage(Uint8Array.from([255,216,255,224,0,0])),false);
+});
 test('delete account requires authentication and explicit confirmation',async()=>{
   try {
     globalThis.fetch=async()=>Response.json({id:userId});

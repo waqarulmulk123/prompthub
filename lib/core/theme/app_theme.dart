@@ -36,6 +36,8 @@ abstract final class AppTheme {
       navigationBarTheme: const NavigationBarThemeData(backgroundColor: panel),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
+          backgroundColor: const Color(0xFF4F46E5),
+          foregroundColor: Colors.white,
           minimumSize: const Size(48, 48),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),

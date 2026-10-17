@@ -139,7 +139,7 @@ class AppDatabase extends _$AppDatabase {
       Variable.withInt(offset < 0 ? 0 : offset),
     ]);
     final rows = await customSelect(
-      '''SELECT payload FROM cached_prompts_table ${conditions.isEmpty ? '' : 'WHERE ${conditions.join(' AND ')}'} ORDER BY CAST(COALESCE(json_extract(payload, '\$.likes_count'), 0) AS INTEGER) DESC, CASE category WHEN 'fashion' THEN 0 WHEN 'men' THEN 1 WHEN 'women' THEN 2 ELSE 3 END, rank, id LIMIT ? OFFSET ?''',
+      '''SELECT payload FROM cached_prompts_table ${conditions.isEmpty ? '' : 'WHERE ${conditions.join(' AND ')}'} ORDER BY CAST(COALESCE(json_extract(payload, '\$.likes_count'), 0) AS INTEGER) DESC, CAST(COALESCE(json_extract(payload, '\$.featured'), 0) AS INTEGER) DESC, CASE category WHEN 'fashion' THEN 0 WHEN 'men' THEN 1 WHEN 'women' THEN 2 ELSE 3 END, rank, id LIMIT ? OFFSET ?''',
       variables: parameters,
     ).get();
     return rows

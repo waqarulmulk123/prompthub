@@ -330,7 +330,10 @@ class _QuickState extends ConsumerState<QuickInspireScreen> {
       final next = await ref.read(repositoryProvider).search(offset: _offset);
       if (mounted) {
         setState(() {
-          _items.addAll(next);
+          final unique = uniquePrompts([..._items, ...next]);
+          _items
+            ..clear()
+            ..addAll(unique);
           _offset += next.length;
           _more = next.length == discoveryPageSize;
         });

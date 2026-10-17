@@ -6,6 +6,8 @@
 .vercel/
 .wrangler/
 config/client.json
+config/*.private.json
+config/*.private.sql
 assets/fonts/*.ttf
 web/sqlite3.wasm
 web/drift_worker.dart.js
@@ -63,3 +65,4 @@ app.*.map.json
 
 /android/.kotlin/
 /android/build/
+/admin/vendor/

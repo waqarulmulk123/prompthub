@@ -9,7 +9,7 @@ class TestFeed extends FeedNotifier {
   @override
   Future<FeedState> build() async => const FeedState(items: [], hasMore: false);
   @override
-  Future<void> refresh() async {}
+  Future<void> refresh({bool preservePages = false}) async {}
 }
 
 void main() {

@@ -12,12 +12,15 @@ try {
  await checked('/rest/v1/rpc/save_prompt',{method:'POST',headers,body:JSON.stringify({p_prompt_id:'pv_001',p_variables:{}})});
  const pixel='iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8DwHwAFgAI/ScLbtAAAAABJRU5ErkJggg==';
  await checked('/functions/v1/community-remixes',{method:'POST',headers,body:JSON.stringify({action:'submit',prompt_id:'pv_001',caption:'Disposable lifecycle audit',rights_confirmed:true,image_base64:pixel})});
+ const repeated=await fetch(base+'/functions/v1/community-remixes',{method:'POST',headers,body:JSON.stringify({action:'submit',prompt_id:'pv_001',caption:'Duplicate audit',rights_confirmed:true,image_base64:pixel}),signal:AbortSignal.timeout(20000)});
+ if(repeated.ok)throw Error('Duplicate image accepted');
  const images=await (await checked('/rest/v1/community_remixes?select=image_path&user_id=eq.'+fixture.id,{headers})).json();
+ if(images.length!==1)throw Error('Duplicate submission row created');
  if(!images[0]?.image_path)throw Error('Test upload missing');
  await checked('/functions/v1/delete-account',{method:'POST',headers,body:JSON.stringify({confirmation:'DELETE'})});
  const oldSession=await fetch(base+'/auth/v1/user',{headers,signal:AbortSignal.timeout(10000)});
  if(oldSession.ok)throw Error('Deleted account session was accepted');
- writeFileSync('build/account-lifecycle-result.json',JSON.stringify({user_id:fixture.id,image_path:images[0].image_path,accountDeletion:true,oldSessionRejected:true}));
+ writeFileSync('build/account-lifecycle-result.json',JSON.stringify({user_id:fixture.id,image_path:images[0].image_path,accountDeletion:true,oldSessionRejected:true,duplicateImageRejected:true}));
  console.log(JSON.stringify({accountDeletion:true,oldSessionRejected:true}));
 } finally {
  await fetch(base+'/functions/v1/delete-account',{method:'POST',headers,body:JSON.stringify({confirmation:'DELETE'}),signal:AbortSignal.timeout(20000)}).catch(()=>{});

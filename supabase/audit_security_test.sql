@@ -3,6 +3,11 @@ create temporary table audit_user as select gen_random_uuid() id;
 insert into auth.users(id,instance_id,aud,role,email,email_confirmed_at,created_at,updated_at)
 select id,'00000000-0000-0000-0000-000000000000'::uuid,'authenticated','authenticated','audit-'||id||'@example.invalid',now(),now(),now() from audit_user;
 do $$ declare u uuid:=(select id from audit_user);begin
+ perform public.submit_remix(u,'pv_001','Audit',u::text||'/one.jpg',repeat('a',64));
+ begin
+  perform public.submit_remix(u,'pv_001','Duplicate',u::text||'/two.jpg',repeat('a',64));
+  raise exception 'Duplicate community image accepted';
+ exception when unique_violation then null;end;
  perform public.apply_entitlement('revenuecat','a',u,true,now()+interval '10 days',now()-interval '5 minutes');
  perform public.apply_entitlement('lemonsqueezy','b',u,true,now()+interval '20 days',now()-interval '4 minutes');
  perform public.apply_entitlement('revenuecat','c',u,false,now(),now()-interval '3 minutes');

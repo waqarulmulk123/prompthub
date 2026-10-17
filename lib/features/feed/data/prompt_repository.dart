@@ -13,7 +13,24 @@ import '../../auth/auth_service.dart';
 class PromptRemoteDatasource {
   PromptRemoteDatasource(this.dio);
   final Dio dio;
+  Map<String, String> categoryLabels = {...categories};
+  String announcement = '';
   Future<List<PromptItem>> fetch({CancelToken? cancelToken}) async {
+    if (AppConfig.hasSupabase) {
+      final response = await dio.get(
+        '${AppConfig.supabaseUrl}/functions/v1/catalog-content',
+        options: Options(headers: {'apikey': AppConfig.supabaseKey}),
+        cancelToken: cancelToken,
+      );
+      final data = Map<String, dynamic>.from(response.data as Map);
+      final labels = Map<String, dynamic>.from(data['categories'] as Map);
+      categoryLabels = {
+        'all': categories['all']!,
+        for (final entry in labels.entries) entry.key: entry.value as String,
+      };
+      announcement = data['announcement'] as String? ?? '';
+      return uniquePrompts(decode(data));
+    }
     if (AppConfig.catalogUrl.isEmpty) return bundled();
     final base = Uri.parse(
       '${AppConfig.catalogUrl.replaceFirst(RegExp(r'/+$'), '')}/',

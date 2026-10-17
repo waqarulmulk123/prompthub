@@ -28,6 +28,10 @@ jobs:
       - run: node tools/config_test.mjs
       - run: node --test tools/catalogHealth.test.mjs
       - run: node --test tools/backend_edge.test.mjs
+      - run: node --test tools/prepare_private_content.test.mjs
+      - run: node --test tools/admin_edge.test.mjs
+      - run: node tools/bootstrap_admin.mjs
+      - run: node --check admin/admin.js
       - run: flutter build web --wasm --dart-define-from-file=config/client.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:

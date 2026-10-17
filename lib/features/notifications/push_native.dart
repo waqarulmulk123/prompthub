@@ -12,7 +12,7 @@ class PushService {
   static bool get available =>
       supported && const bool.fromEnvironment('ONESIGNAL_NATIVE_READY');
   static Future<void> initialize() async {
-    if (!supported) return;
+    if (!available) return;
     OneSignal.initialize(appId);
     if (kDebugMode) {
       installPushVerification();

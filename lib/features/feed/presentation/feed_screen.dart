@@ -11,6 +11,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../domain/prompt_item.dart';
+import '../data/prompt_repository.dart';
 import 'feed_notifier.dart';
 import 'prompt_image.dart';
 
@@ -28,7 +29,9 @@ class _FeedScreenState extends ConsumerState<FeedScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) ref.read(feedNotifierProvider.notifier).refresh();
+      if (mounted) {
+        ref.read(feedNotifierProvider.notifier).refresh(preservePages: true);
+      }
     });
   }
 
@@ -43,6 +46,8 @@ class _FeedScreenState extends ConsumerState<FeedScreen> {
   Widget build(BuildContext context) {
     final feed = ref.watch(feedNotifierProvider);
     final data = feed.asData?.value;
+    final remote = ref.watch(repositoryProvider).remote;
+    final categoryOptions = remote.categoryLabels;
     return SafeArea(
       child: RefreshIndicator(
         onRefresh: () => ref.read(feedNotifierProvider.notifier).refresh(),
@@ -177,14 +182,19 @@ class _FeedScreenState extends ConsumerState<FeedScreen> {
                       ),
                     ),
                     const SizedBox(height: 24),
+                    if (remote.announcement.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: Text(remote.announcement),
+                      ),
                     SizedBox(
                       height: 44,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
-                        itemCount: categories.length,
+                        itemCount: categoryOptions.length,
                         separatorBuilder: (_, _) => const SizedBox(width: 8),
                         itemBuilder: (context, i) {
-                          final entry = categories.entries.elementAt(i);
+                          final entry = categoryOptions.entries.elementAt(i);
                           return ChoiceChip(
                             label: Text(entry.value),
                             selected: (data?.category ?? 'all') == entry.key,

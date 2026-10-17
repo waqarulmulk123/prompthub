@@ -43,6 +43,89 @@ const prompts = entries.map(([title,category,photo,ratio,raw_prompt],i) => ({
   source_url:`https://unsplash.com`, license:'Unsplash License (photo); CC0-1.0 (template)', safety_reviewed:true, verified:false,
   created_at:'2026-10-17T00:00:00Z',
 }));
+prompts.push(...[
+  {
+    "id": "pv_pro_001",
+    "title": "Modular Flagship Smartphone Multi-Angle Suite",
+    "category": "product_ads",
+    "raw_prompt": "",
+    "variables": [],
+    "outputs": [
+      {
+        "model": "chatgpt_4o",
+        "image_url": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80",
+        "blur_hash": "",
+        "aspect_ratio": 1
+      }
+    ],
+    "is_pro_only": true,
+    "likes_count": 0,
+    "tags": [
+      "commercial",
+      "original",
+      "pro"
+    ],
+    "attribution": "Illustrative reference photo via Unsplash. Original commercial template; not a verified AI output.",
+    "source_url": "https://unsplash.com",
+    "license": "Unsplash License (photo)",
+    "safety_reviewed": true,
+    "verified": false
+  },
+  {
+    "id": "pv_pro_002",
+    "title": "Artisanal Specialty Coffee Advertising Kit",
+    "category": "product_ads",
+    "raw_prompt": "",
+    "variables": [],
+    "outputs": [
+      {
+        "model": "chatgpt_4o",
+        "image_url": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=80",
+        "blur_hash": "",
+        "aspect_ratio": 1
+      }
+    ],
+    "is_pro_only": true,
+    "likes_count": 0,
+    "tags": [
+      "commercial",
+      "original",
+      "pro"
+    ],
+    "attribution": "Illustrative reference photo via Unsplash. Original commercial template; not a verified AI output.",
+    "source_url": "https://unsplash.com",
+    "license": "Unsplash License (photo)",
+    "safety_reviewed": true,
+    "verified": false
+  },
+  {
+    "id": "pv_pro_003",
+    "title": "Zero-Waste Botanical Cosmetics Packaging System",
+    "category": "product_ads",
+    "raw_prompt": "",
+    "variables": [],
+    "outputs": [
+      {
+        "model": "chatgpt_4o",
+        "image_url": "https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=900&q=80",
+        "blur_hash": "",
+        "aspect_ratio": 1
+      }
+    ],
+    "is_pro_only": true,
+    "likes_count": 0,
+    "tags": [
+      "commercial",
+      "original",
+      "pro"
+    ],
+    "attribution": "Illustrative reference photo via Unsplash. Original commercial template; not a verified AI output.",
+    "source_url": "https://unsplash.com",
+    "license": "Unsplash License (photo)",
+    "safety_reviewed": true,
+    "verified": false
+  }
+]);
 for (const directory of ['assets/catalog','catalog']) {
   mkdirSync(directory,{recursive:true});
   writeFileSync(`${directory}/feed_page_1.json`,JSON.stringify({prompts},null,2));

@@ -39,8 +39,23 @@ create index creator_blocks_blocked_user_idx on private.creator_blocks(blocked_u
 create index drop_claims_day_idx on private.drop_claims(day);
 create index remix_reports_user_idx on private.remix_reports(user_id);
 create index weekly_winners_user_idx on private.weekly_winners(user_id);
+alter table public.community_remixes add column content_hash text check(content_hash is null or content_hash ~ '^[a-f0-9]{64}$');
+create unique index community_unique_image on public.community_remixes(content_hash) where content_hash is not null;
+create function public.submit_remix(p_user uuid,p_prompt text,p_caption text,p_path text,p_hash text)
+returns uuid language plpgsql security definer set search_path='' as $$
+declare v_id uuid;
+begin
+ if p_hash is null or p_hash !~ '^[a-f0-9]{64}$' then raise exception 'Invalid content hash';end if;
+ v_id:=public.submit_remix(p_user,p_prompt,p_caption,p_path);
+ update public.community_remixes set content_hash=p_hash where id=v_id;
+ return v_id;
+end; $$;
+revoke all on function public.submit_remix(uuid,text,text,text,text) from public,anon,authenticated;
+grant execute on function public.submit_remix(uuid,text,text,text,text) to service_role;
 update private.drop_pool set prompt=jsonb_set(prompt,'{outputs}','[]');
 update private.drop_days set prompts=(select jsonb_agg(jsonb_set(p,'{outputs}','[]') order by n) from jsonb_array_elements(prompts) with ordinality a(p,n));
+delete from private.drop_pool p using private.drop_pool earlier
+where p.slot>earlier.slot and lower(regexp_replace(btrim(p.prompt->>'raw_prompt'),'\s+',' ','g'))=lower(regexp_replace(btrim(earlier.prompt->>'raw_prompt'),'\s+',' ','g'));
 create unique index drop_pool_unique_text on private.drop_pool(lower(regexp_replace(btrim(prompt->>'raw_prompt'),'\s+',' ','g')));
 create or replace function private.ensure_drop() returns void language plpgsql security definer set search_path='' as $$
 declare d date:=private.drop_day();data jsonb;

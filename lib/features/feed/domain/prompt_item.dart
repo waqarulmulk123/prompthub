@@ -1,3 +1,5 @@
+import '../../../core/config/app_config.dart';
+
 const discoveryPageSize = 10;
 
 class PromptVariable {
@@ -39,7 +41,12 @@ class PromptOutput {
         ratio > 4 ||
         !ratio.isFinite ||
         url.scheme != 'https' ||
-        url.host != 'images.unsplash.com' ||
+        !(url.host == 'images.unsplash.com' ||
+            (AppConfig.hasSupabase &&
+                url.host == Uri.parse(AppConfig.supabaseUrl).host &&
+                url.path.startsWith(
+                  '/storage/v1/object/sign/catalog-media/catalog/',
+                ))) ||
         url.userInfo.isNotEmpty ||
         url.hasPort) {
       throw const FormatException('Invalid catalog image');
@@ -110,6 +117,7 @@ class PromptItem {
     this.tags = const [],
     this.attribution = '',
     this.verified = false,
+    this.featured = false,
   });
   final String id;
   final String title;
@@ -122,6 +130,7 @@ class PromptItem {
   final List<String> tags;
   final String attribution;
   final bool verified;
+  final bool featured;
 
   factory PromptItem.fromJson(Map<String, dynamic> json) {
     final outputs = (json['outputs'] as List)
@@ -148,6 +157,7 @@ class PromptItem {
       tags: (json['tags'] as List? ?? []).cast<String>(),
       attribution: json['attribution'] as String? ?? '',
       verified: json['verified'] as bool? ?? false,
+      featured: json['featured'] as bool? ?? false,
     );
   }
   Map<String, dynamic> toJson() => {
@@ -162,6 +172,7 @@ class PromptItem {
     'tags': tags,
     'attribution': attribution,
     'verified': verified,
+    'featured': featured,
   };
 }
 
